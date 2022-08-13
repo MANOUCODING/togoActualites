@@ -18,17 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/home', 'welcome');
 
-Route::view('/welcome', 'welcome');
-
 Route::view('/', 'welcome');
 
-//Partie connexion
+Route::view('/about', 'welcome');
 
-Route::view('/admin', 'login');
+Route::view('/login', 'welcome');
 
-Route::view('/admin/login', 'login');
+Route::view('/register', 'welcome');
 
-Route::view('/login', 'login');
+Route::view('/contact', 'welcome');
 
 //Partie administration
 

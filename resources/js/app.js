@@ -6,26 +6,25 @@ import router from './router';
 
 import App from './components/App.vue';
 
-import Login from './components/LoginComponent.vue';
+import Toaster from "@meforma/vue-toaster";
 
-import Welcome from './components/WelcomeComponent.vue';
+import headerComponent from './components/includes/app/headerComponent.vue';
 
-import headerComponent from './components/includes/headerComponent.vue';
+import footerComponent from './components/includes/app/footerComponent.vue';
 
-import footerComponent from './components/includes/footerComponent.vue';
+import adminheaderComponent from './components/includes/admin/headerComponent.vue';
+
+import adminfooterComponent from './components/includes/admin/footerComponent.vue';
 
 const app = createApp(App);
 
-const login = createApp(Login);
+app.component('headerbar', headerComponent);
 
-const welcome = createApp(Welcome);
+app.component('footerbar', footerComponent);
 
-welcome.component('headerbar', headerComponent);
+app.component('adminheaderbar', adminheaderComponent);
 
-welcome.component('footerbar', footerComponent);
+app.component('adminfooterbar', adminfooterComponent);
 
-welcome.mount('#welcome');
 
-login.use(router).mount('#login');
-
-app.use(router).mount('#app');
+app.use(Toaster).use(router).mount('#app');

@@ -1,31 +1,38 @@
 
 import { createRouter, createWebHistory } from "vue-router";
 
-import WelcomeComponent from '../components/WelcomeComponent.vue';
+import HomeComponent from '../components/HomeComponent.vue';
+
+import AboutComponent from '../components/AboutComponent.vue';
+
+import ContactComponent from '../components/ContactComponent.vue';
 
 import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
 import LoginComponent from '../components/LoginComponent.vue';
 
+import RegisterComponent from '../components/RegisterComponent.vue';
+
 const routes = [
 
   {
     path: '/',
-    component: WelcomeComponent,
-    name: 'welcome'
+    component: HomeComponent,
+    name: 'home'
   },
 
   {
-    path: '/welcome',
-    component: WelcomeComponent,
-    name: 'welcome'
+    path: '/about',
+    component: AboutComponent,
+    name: 'about'
   },
 
   {
-    path: '/home',
-    component: WelcomeComponent,
-    name: 'welcome'
+    path: '/contact',
+    component: ContactComponent,
+    name: 'contact'
   },
+ 
 
   {
     path: '/login',
@@ -34,16 +41,11 @@ const routes = [
   },  
 
   {
-    path: '/admin/login',
-    component: LoginComponent,
-    name: 'login'
+    path: '/register',
+    component: RegisterComponent,
+    name: 'register'
   },  
-
-  {
-    path: '/admin',
-    component: LoginComponent,
-    name: 'login'
-  },  
+  
 
   {
     path: '/admin/dashboard',

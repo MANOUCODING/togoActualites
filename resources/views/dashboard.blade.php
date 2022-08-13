@@ -14,7 +14,7 @@
 
 	<title>AdminHub</title>
 </head>
-<body id="app">
+<body >
 
   <script src=" {{ asset('js/app.js') }} "></script>
   
