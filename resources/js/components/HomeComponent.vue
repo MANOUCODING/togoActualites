@@ -1,38 +1,33 @@
 <template>
- 
+    <div v-if="load" style="display: block; margin-left: auto; margin-right: auto; margin-top: 20%;" class="conteneur_general_load_10">
+    <img src="assets/images/TOgoActualité Final.png" style="width: 210px; text-align: center" alt=""> <br> <br>
+    <div class="cle_bleu_load_10" style="margin-left: auto; margin-right: auto"></div>
+</div>
     <headerbar> </headerbar>
     <!-- =======================Trending END -->
     <main>
-            <!-- =======================Trending START -->
-            <section class="py-2">
-                <div class="container">
-                    <div class="row g-0">
-                        <div class="col-12 bg-primary bg-opacity-10 p-2 rounded">
-                            <div class="d-sm-flex align-items-center text-center text-sm-start">
-                                <!-- Title -->
-                                <div class="me-3">
-                                    <span class="badge bg-primary p-2 px-3">Trending:</span>
-                                </div>
-                                <!-- Slider -->
-                                <div class="tiny-slider arrow-end arrow-xs arrow-white arrow-round arrow-md-none">
-                                    <div class="tiny-slider-inner"
-                                        data-autoplay="true"
-                                        data-hoverpause="true"
-                                        data-gutter="0"
-                                        data-arrow="true"
-                                        data-dots="false"
-                                        data-items="1">
-                                        <!-- Slider items -->
-                                        <div> <a href="#" class="text-reset btn-link">The most common business debate isn't as black and white as you might think</a></div>
-                                        <div> <a href="#" class="text-reset btn-link">How the 10 worst business fails of all time could have been prevented </a></div>
-                                        <div> <a href="#" class="text-reset btn-link">The most common business debate isn't as black and white as you might think </a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- Row END -->
+            <section class="pt-4">
+        <div class="container">
+            <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark-overlay-4 overflow-hidden card-bg-scale h-400 text-center" style="background-image:url(assets/images/blog/16by9/09.jpg); background-position: center left; background-size: cover;">
+            <!-- Card Image overlay -->
+            <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
+                <div class="w-100 my-auto">
+                <h1 class="text-white display-4">Désolé Cette partie est en maintenance pour le moment</h1>
+                <!-- breadcrumb -->
+                <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-dots mb-0">
+                    <li class="breadcrumb-item"><router-link to="/"><i class="bi bi-house me-1"></i> Accueil</router-link></li>
+                    </ol>
+                </nav>
                 </div>
-            </section>
+            </div>
+            </div>
+        </div>
+    </div>
+	</div>
+</section>
              </main>
        <!--==================== MAIN ====================-->
     <footerbar> </footerbar>
@@ -40,6 +35,19 @@
 </template>
 <script>
 export default {
- 
+  data(){
+		return {
+            infos: {},
+            load: true,
+        }
+	},
+    methods: {
+         getResults(){
+            this.load = false
+        },
+    },
+    mounted() {
+        this.getResults();
+    }
 }
 </script>

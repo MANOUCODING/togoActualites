@@ -1,4 +1,6 @@
 <template>
+
+
 <!-- =======================
 Header START -->
 <header class="navbar-light navbar-sticky header-static border-bottom navbar-dashboard">
@@ -6,10 +8,9 @@ Header START -->
 	<nav class="navbar navbar-expand-xl">
 		<div class="container">
 			<!-- Logo START -->
-			<a class="navbar-brand me-3" href="index.html">
-				<img class="navbar-brand-item light-mode-item" src="/assets/images/logo.svg" alt="logo">			
-				<img class="navbar-brand-item dark-mode-item" src="/assets/images/logo-light.svg" alt="logo">			
-			</a>
+			<router-link class="navbar-brand me-3" to="/">
+				<img class="navbar-brand-item light-mode-item" src="/assets/images/TOgoActualité Final.png" style="height: 50px; width: 250px" alt="logo">				
+			</router-link>
 			<!-- Logo END -->
 
 			<!-- Responsive navbar toggler -->
@@ -23,64 +24,29 @@ Header START -->
 				<ul class="navbar-nav navbar-nav-scroll mx-auto">
 
 					<!-- Nav item 1 Demos -->
-					<li class="nav-item"><a class="nav-link" href=""><i class="bi bi-house-door me-1"></i>Tableau de bord</a></li>
+					<li class="nav-item"><router-link class="nav-link" to="/admin/dashboard"><i class="bi bi-house-door me-1"></i>Tableau de bord</router-link></li>
 
 					<!-- Nav item 2 Post -->
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-pencil me-1"></i>Articles</a>
-						<ul class="dropdown-menu" aria-labelledby="postMenu">
-							<!-- dropdown submenu -->
-							<li> <a class="dropdown-item" href="dashboard-post-list.html">Post List</a> </li>
-							<li> <a class="dropdown-item" href="dashboard-post-categories.html">Post Categories</a> </li>
-							<li> <a class="dropdown-item" href="dashboard-post-create.html">Create a Post</a> </li>
-							<li> <a class="dropdown-item" href="dashboard-post-edit.html">Edit Post</a> </li>
-						</ul>
+						<router-link class="nav-link" to="#" id="postMenu"><i class="bi bi-pencil me-1"></i>Articles</router-link>
 					</li>
 
 					<!-- Nav item 3 Pages -->
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Catégories</a>
-						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-							<li> <a class="dropdown-item" href="dashboard-author-list.html">Author List</a></li>
-							<li> <a class="dropdown-item" href="dashboard-author-single.html">Author Single</a></li>
-							<li> <a class="dropdown-item" href="dashboard-edit-profile.html">Edit Profile</a></li>
-							<li> <a class="dropdown-item" href="dashboard-reviews.html">Reviews</a></li>
-							<li> <a class="dropdown-item" href="dashboard-settings.html">Settings</a></li>
-							<li class="dropdown-divider"></li>
-							<li> <a class="dropdown-item" href="https://support.webestica.com/" target="_blank"> <i class="text-warning fa-fw bi bi-life-preserver me-2"></i>Support</a></li>
-							<li> <a class="dropdown-item" href="docs/index.html" target="_blank"> <i class="text-danger fa-fw bi bi-card-text me-2"></i>Documentation</a></li>
-							<li class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="https://blogzine.webestica.com/rtl" target="_blank"> <i class="text-info fa-fw bi bi-toggle-off me-2"></i>RTL demo</a></li>
-							<li><a class="dropdown-item" href="https://themes.getbootstrap.com/store/webestica/" target="_blank"> <i class="text-success fa-fw bi bi-cloud-download-fill me-2"></i>Buy blogzine!</a> </li>
-						</ul>
+						<router-link class="nav-link" to="/admin/category" id="pagesMenu"><i class="bi bi-folder me-1"></i>Catégories</router-link>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Messages</a>
+						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Autres</a>
 						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-							<li> <a class="dropdown-item" href="dashboard-author-list.html">Author List</a></li>
-							<li> <a class="dropdown-item" href="dashboard-author-single.html">Author Single</a></li>
-							<li> <a class="dropdown-item" href="dashboard-edit-profile.html">Edit Profile</a></li>
-							<li> <a class="dropdown-item" href="dashboard-reviews.html">Reviews</a></li>
-							<li> <a class="dropdown-item" href="dashboard-settings.html">Settings</a></li>
-							<li class="dropdown-divider"></li>
-							<li> <a class="dropdown-item" href="https://support.webestica.com/" target="_blank"> <i class="text-warning fa-fw bi bi-life-preserver me-2"></i>Support</a></li>
-							<li> <a class="dropdown-item" href="docs/index.html" target="_blank"> <i class="text-danger fa-fw bi bi-card-text me-2"></i>Documentation</a></li>
-							<li class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="https://blogzine.webestica.com/rtl" target="_blank"> <i class="text-info fa-fw bi bi-toggle-off me-2"></i>RTL demo</a></li>
-							<li><a class="dropdown-item" href="https://themes.getbootstrap.com/store/webestica/" target="_blank"> <i class="text-success fa-fw bi bi-cloud-download-fill me-2"></i>Buy blogzine!</a> </li>
+							<li> <router-link class="dropdown-item" to="#">Messages</router-link></li>
+							<li> <router-link class="dropdown-item" to="#">Commentaires</router-link></li>
+							<li> <router-link class="dropdown-item" to="#">NewsLetters</router-link></li>
+							<li> <router-link class="dropdown-item" to="#">Visites</router-link></li>
 						</ul>
 					</li>
 				</ul>
 				
 				<!-- Search dropdown START -->
-				<div class="nav my-3 my-xl-0 px-4 px-lg-1 flex-nowrap align-items-center">
-					<div class="nav-item w-100">
-						<form class="position-relative">
-							<input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
-						</form>
-					</div>
-				</div>
 				<!-- Search dropdown END -->
 			</div>
 		  <!-- Main navbar END -->
@@ -194,17 +160,24 @@ Header START -->
 									<img class="avatar-img rounded-circle shadow" src="/assets/images/avatar/03.jpg" alt="avatar">
 								</div>
 								<div>
-									<a class="h6 mt-2 mt-sm-0" href="#"> Louis Ferguson</a>
-									<p class="small m-0">example@gmail.com</p>
+									<a class="h6 mt-2 mt-sm-0" href="#"> Alexandre D. </a>
+									<p class="small m-0">Super Administrateur</p>
 								</div>
 							</div>
 							<hr>
 						</li>
 						<!-- Links -->
-						<li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
-						<li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>
-						<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>
-						<li><a class="dropdown-item" href="#"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
+						<li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Modifier son profil</a></li>
+						<li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Paramètres</a></li>
+						<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Aidez-moi</a></li>
+						<li>
+							<a class="dropdown-item" href="#" v-if="loading">
+								<i class="bi bi-power fa-fw me-2"></i>Deconnexion en cours ...
+							</a>
+							<a class="dropdown-item" href="#" @click="logout" v-else>
+								<i class="bi bi-power fa-fw me-2"></i>Deconnexion 
+							</a>
+						</li>
 						<li class="dropdown-divider mb-3"></li>
 						<li>
 							<div class="dropdown-item">
@@ -229,6 +202,37 @@ Header END -->
 </template>
 <script>
 export default {
-  
+  data(){
+		return{
+			infos:{
+				role: null,
+				user: null,
+			},
+			loading: false
+		};
+	},
+
+	methods:{
+			logout(){
+				this.loading = true
+				axios.post('/api/logout')
+				.then(response =>{
+						if(response.status == 200){
+							if(response.data.success == false){
+								if (response.data.message == "Erreur de validation") {
+									
+								}
+							}else{
+								this.loading = false
+								this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Déconnexion réussie </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
+								this.$router.push({name:"home"})
+							}
+						}
+					}
+				).catch(error =>{
+					console.dir(error)
+				})
+			}
+		},
 }
 </script>

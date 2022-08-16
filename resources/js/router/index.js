@@ -9,6 +9,8 @@ import ContactComponent from '../components/ContactComponent.vue';
 
 import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
+import CategoryComponent from '../components/admin/CategoryComponent.vue';
+
 import LoginComponent from '../components/LoginComponent.vue';
 
 import RegisterComponent from '../components/RegisterComponent.vue';
@@ -51,6 +53,12 @@ const routes = [
     path: '/admin/dashboard',
     component:  DashboardComponent,
     name: 'dashboard'
+  },
+
+  {
+    path: '/admin/category',
+    component:  CategoryComponent,
+    name: 'category'
   },
 
 ];

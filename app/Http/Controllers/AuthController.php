@@ -211,37 +211,41 @@ class AuthController extends BaseController
      */
     public function profile() {
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user() === null) {
+            return $this->sendError('Veuillez vous connecter', auth()->user());
+        } else {
+            if (auth()->user()->role_id == 1) {
 
-            return response()->json([
-                'User' => auth()->user(), 
-                'Profil' => Administrateur::where('user_id', auth()->user()->id)->first(),
-                'Role' => Role::where('id', auth()->user()->role_id)->first(),
-                'Espace' => 'ESPACE SUPER ADMINISTRATION',
-            ], 200);
-
-        } elseif(auth()->user()->role_id == 2) {
-
-            return response()->json([
-                'User' => auth()->user(), 
-                'Profil' => Administrateur::where('user_id', auth()->user()->id)->first(),
-                'Role' => Role::where('id', auth()->user()->role_id)->first(),
-                'Espace' => 'ESPACE PUBLICATEUR ARTICLE',
-            ], 200);
-
-        }else{
-
-            return response()->json([
-                'User' => auth()->user(), 
-                'Profil' => Utilisateur::where('user_id', auth()->user()->id)->first(),
-                'Role' => Role::where('id', auth()->user()->role_id)->first(),
-                'Espace' => 'ESPACE UTILISATEUR',
-            ], 200);
-
+                return response()->json([
+                    'User' => auth()->user(), 
+                    'Profil' => Administrateur::where('user_id', auth()->user()->id)->first(),
+                    'Role' => Role::where('id', auth()->user()->role_id)->first(),
+                    'Espace' => 'ESPACE SUPER ADMINISTRATION',
+                ], 200);
+    
+            } elseif(auth()->user()->role_id == 2) {
+    
+                return response()->json([
+                    'User' => auth()->user(), 
+                    'Profil' => Administrateur::where('user_id', auth()->user()->id)->first(),
+                    'Role' => Role::where('id', auth()->user()->role_id)->first(),
+                    'Espace' => 'ESPACE PUBLICATEUR ARTICLE',
+                ], 200);
+    
+            }else{
+    
+                return response()->json([
+                    'User' => auth()->user(), 
+                    'Profil' => Utilisateur::where('user_id', auth()->user()->id)->first(),
+                    'Role' => Role::where('id', auth()->user()->role_id)->first(),
+                    'Espace' => 'ESPACE UTILISATEUR',
+                ], 200);
+    
+            }
         }
+        
 
-
-        return response()->json(auth()->user());
+       
     }
     /**
      * Get the token array structure.

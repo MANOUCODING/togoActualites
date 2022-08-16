@@ -30,4 +30,6 @@ Route::view('/contact', 'welcome');
 
 //Partie administration
 
-Route::view('/admin/dashboard', 'dashboard');
+Route::view('/admin/dashboard', 'welcome');
+
+Route::view('/admin/category', 'welcome');

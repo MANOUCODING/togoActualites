@@ -30,7 +30,7 @@ class AdministrateurTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'telephone' => '0022870046628',
                 'role_id' => 1,
-                'password' => Hash::make('admin1234'), // password
+                'password' => Hash::make('SuperAdmin@1234'), // password
                 'remember_token' => Str::random(10),
             ],
 

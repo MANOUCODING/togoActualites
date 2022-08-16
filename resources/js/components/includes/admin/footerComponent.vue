@@ -8,7 +8,7 @@ Footer START -->
       <div class="row align-items-center justify-content-between">
         <div class="col-lg-6">
           <!-- Copyright -->
-          <div class="text-center text-lg-start">©2022 <a href="https://www.webestica.com/" class="text-reset btn-link" target="_blank">Webestica</a>. All rights reserved
+          <div class="text-center text-lg-start">©2022 <router-link to="/" class="text-reset btn-link" target="_blank">Togo Actualités</router-link>.Tous droits réservés
           </div>
         </div>
         <div class="col-lg-6 d-sm-flex align-items-center justify-content-center justify-content-lg-end">

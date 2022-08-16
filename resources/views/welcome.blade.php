@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Blogzine - Blog and Magazine Bootstrap 5 Theme</title>
+	<title>Accueil - Togo Actualités</title>
 
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
@@ -24,10 +24,12 @@
 	<link rel="stylesheet" type="text/css" href="/assets/vendor/plyr/plyr.css">
 
 	<!-- Theme CSS -->
-	<link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link id="style-switch" rel="stylesheet" type="text/css" href="/assets/css/style.css">
 
-	<link rel="stylesheet" type="text/css" href="assets/vendor/apexcharts/css/apexcharts.css">
-	<link rel="stylesheet" type="text/css" href="assets/vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/apexcharts/css/apexcharts.css">
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+
+	<style type="text/css">.conteneur_general_load_10{overflow:hidden;width:245px;height:200px} .cle_bleu_load_10{border-radius:50px;width:50px;height:50px;border-top:10px solid 	#0000FF;border-right:10px solid 	#0000FF;border-bottom:10px solid 	#0000FF;border-left:10px solid #FFFFFF;-webkit-animation:load_dix 1.4s infinite linear;-moz-animation:load_dix 1.4s infinite linear;-ms-animation:load_dix 1.4s infinite linear;-o-animation:load_dix 1.4s infinite linear;animation:load_dix 1.4s infinite linear} @-webkit-keyframes load_dix{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg)}50%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}100%{-webkit-transform:rotate(720deg);-moz-transform:rotate(720deg);-ms-transform:rotate(720deg);transform:rotate(720deg)}} @-moz-keyframes load_dix{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg)}50%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}100%{-webkit-transform:rotate(720deg);-moz-transform:rotate(720deg);-ms-transform:rotate(720deg);transform:rotate(720deg)}} @-ms-keyframes load_dix{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg)}50%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}100%{-webkit-transform:rotate(720deg);-moz-transform:rotate(720deg);-ms-transform:rotate(720deg);transform:rotate(720deg)}} @keyframes load_dix{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg)}50%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}100%{-webkit-transform:rotate(720deg);-moz-transform:rotate(720deg);-ms-transform:rotate(720deg);transform:rotate(720deg)}}</style>
 
 </head>
 
@@ -48,10 +50,10 @@ JS libraries, plugins and custom scripts -->
 
 
 <!-- Vendors -->
-<script src="assets/vendor/apexcharts/js/apexcharts.min.js"></script>
-<script src="assets/vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
+<script src="/assets/vendor/apexcharts/js/apexcharts.min.js"></script>
+<script src="/assets/vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
 <!-- Template Functions -->
-<script src="assets/js/functions.js"></script>
+<script src="/assets/js/functions.js"></script>
 </body>
 </html>
 
