@@ -11,6 +11,12 @@ import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
 import CategoryComponent from '../components/admin/CategoryComponent.vue';
 
+//Gestion des articles
+
+import ArticlesAllComponent from '../components/admin/Articles/ArticlesAllComponent.vue';
+
+import CreateArticlesComponent from '../components/admin/Articles/Actions/CreateArticlesComponent.vue';
+
 import LoginComponent from '../components/LoginComponent.vue';
 
 import RegisterComponent from '../components/RegisterComponent.vue';
@@ -60,6 +66,19 @@ const routes = [
     component:  CategoryComponent,
     name: 'category'
   },
+
+  {
+    path: '/admin/articles',
+    component:  ArticlesAllComponent,
+    name: 'articles.all'
+  },
+
+  {
+    path: '/admin/articles/create',
+    component:  CreateArticlesComponent,
+    name: 'articles.create'
+  },
+  
 
 ];
 

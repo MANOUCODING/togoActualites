@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -26,7 +27,6 @@ Route::group(['middleware' => 'api'], function($router) {
 
 //Espace Accueil
 
-Route::get('/home', [CategoryController::class, 'home']);
 
 //Espace Super Administrateur
 
@@ -42,3 +42,11 @@ Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name
 Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('delete.category.show');
 
 Route::post('/category/store', [CategoryController::class, 'store'])->name('store.category');
+
+
+//Gestion des articles
+
+Route::get('/articles/create', [ArticleController::class, 'create']);
+
+Route::post('/articles/store', [ArticleController::class, 'store']);
+

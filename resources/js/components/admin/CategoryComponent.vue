@@ -9,7 +9,11 @@
 Main contain START -->
 <section class="py-4">
 	<div class="container">
-		<div class="row g-4">
+     <div v-if="load" style="display: block; margin-left: auto; margin-right: auto; margin-top: 20%;" class="conteneur_general_load_10">
+      <img src="/assets/images/LOGO PNG.png" style="width: 200px; height: 65px; text-align: center" alt=""> <br> <br>
+      <div class="cle_bleu_load_10" style="margin-left: auto; margin-right: auto"></div>
+     </div>
+		<div v-else class="row g-4">
 
     <div class="col-12" v-if="addCategoryButton">
 				<!-- Latest blog START -->
@@ -27,7 +31,7 @@ Main contain START -->
                   <div class="col-md-9"  v-if="!errors.categoryName">
                     <input class="form-control pe-5 bg-transparent" type="text" name="categoryName" v-model="data.categoryName" placeholder="Entrez le nom de la catégorie">
                   </div>
-                  <div class="col-md-5"  v-else>
+                  <div class="col-md-9"  v-else>
                     <input class="form-control pe-5 bg-transparent is-invalid" name="categoryName" v-model="data.categoryName" type="text" placeholder="Entrez le nom de la catégorie">
                     <div  v-for="error_categoryName in errors.categoryName" :key="error_categoryName" class="invalid-feedback" style="color: red; font-size: 0.9em">
                         {{ error_categoryName }}
@@ -120,7 +124,7 @@ Main contain START -->
 								</thead>
 
 								<!-- Table body START -->
-								<tbody class="border-top-0" v-for="info in infos" :key="info.id" >
+								<tbody class="border-top-0" v-for="info in infos.data" :key="info.id" >
 									<!-- Table item -->
 									<tr>
 										<!-- Table data -->
@@ -162,25 +166,8 @@ Main contain START -->
 						<!-- Blog list table END -->
 
 						<!-- Pagination START -->
-						<div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
-							<!-- Content -->
-							<p class="mb-sm-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-							<!-- Pagination -->
-							<nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
-								<ul class="pagination pagination-sm pagination-bordered mb-0">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-									<li class="page-item"><a class="page-link" href="#">15</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
+            <br>
+						<pagination style="float: right" :limit="4" :data="infos" @pagination-change-page="getResults" />
 						<!-- Pagination END -->
 					</div>
           <div class="card-body" v-else-if="empty == 1">
@@ -228,13 +215,15 @@ export default {
         errorType: false,
         errorMessage : "",
         errors: {},
+        load: true,
       }
   },
   methods: {
-    getResults(){
+    getResults(page = 1){
       axios
-        .get('/api/category')
+        .get('/api/category?page=' + page)
         .then(response => {
+          this.load = false
           if(response.status == 200){
             if (response.data.success == false) {
             }else{

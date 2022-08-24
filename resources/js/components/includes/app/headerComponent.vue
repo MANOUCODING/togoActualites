@@ -7,7 +7,8 @@
 	</div>
 	<div class="offcanvas-body d-flex flex-column pt-0">
 		<div>
-			<img class="light-mode-item my-3" src="assets/images/TOgoActualité Final.png" style="height: 100px; width: 250px" alt="logo">
+		<img class="navbar-brand-item light-mode-item" src="assets/images/logo.svg" alt="logo">			
+				<img class="navbar-brand-item dark-mode-item" src="assets/images/logo-light.svg" alt="logo">	
 			<p>Nous sommes Togo Actualité, l’information en temps réel sur le Togo et l’Afrique. </p>
 			<!-- Nav START -->
 			<ul class="nav d-block flex-column my-4">
@@ -104,8 +105,8 @@ Header START -->
 	</div>
 	<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<router-link class="navbar-brand" to="/" style="margin-top: -30px;">
-					<img class="navbar-brand-item light-mode-item" src="assets/images/TOgoActualité Final.png" style="height: 100px; width: 250px" alt="logo">					
+				<router-link class="navbar-brand" to="/">
+					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">						
 				</router-link>								
 				<!-- Nav right START -->
 				<div class="nav flex-nowrap align-items-center">
@@ -229,7 +230,7 @@ Header START -->
 			</div>
 
 	</nav>
-	<hr style="margin-top: -20px;">
+	<hr style="margin-top: -10px">
 		<!-- Logo Nav START -->
 	<nav class="navbar navbar-expand-lg">
 		<div class="container-fluid">

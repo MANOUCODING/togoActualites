@@ -151,27 +151,13 @@ export default {
   data(){
 		return {
             infos: {},
-            load: true,
+            load: false,
         }
 	},
     methods: {
-         getResults(){
-            axios
-            .get('/api/home')
-            .then(response => {
-                if(response.status == 200){
-                    if (response.data.success == false) {
-                        
-                    }else{
-                        this.load = false
-                        this.infos = response.data.data
-                    }
-                }
-            });
-        },
     },
     mounted() {
-        this.getResults();
+        // this.getResults();
     }
 }
 </script>

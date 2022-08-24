@@ -13,6 +13,10 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import Toaster from "@meforma/vue-toaster";
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
+
+import LaravelVuePagination from 'laravel-vue-pagination';
+
 import headerComponent from './components/includes/app/headerComponent.vue';
 
 import footerComponent from './components/includes/app/footerComponent.vue';
@@ -30,6 +34,12 @@ app.component('footerbar', footerComponent);
 app.component('adminheaderbar', adminheaderComponent);
 
 app.component('adminfooterbar', adminfooterComponent);
+
+app.component('pagination', LaravelVuePagination);
+
+app.use(LaravelVuePagination);
+
+app.use(CKEditor);
 
 app.use(VueSweetalert2);
 

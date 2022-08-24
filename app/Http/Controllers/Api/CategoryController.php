@@ -26,7 +26,7 @@ class CategoryController extends BaseController
 
         } else {
 
-            $categories = Category::get();
+            $categories = Category::paginate(10);
 
             return $this->sendResponse($categories, 'Liste de toutes les categories.');
         }

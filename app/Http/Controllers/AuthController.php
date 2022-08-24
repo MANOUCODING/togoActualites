@@ -193,7 +193,7 @@ class AuthController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout() {
-        auth()->logout();
+        auth('api')->logout();
         return response()->json(['message' => 'Deconnexion réussie']);
     }
     /**

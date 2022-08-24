@@ -18,11 +18,16 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^35.0.1",
+        "@ckeditor/ckeditor5-vue": "^4.0.1",
+        "@grafikart/drop-files-element": "^1.0.9",
         "@meforma/vue-toaster": "^1.3.0",
+        "laravel-vue-pagination": "^3.0.0",
         "moment": "^2.29.4",
         "mosha-vue-toastify": "^1.0.23",
         "sweetalert2": "^11.4.26",
         "vue": "^3.2.36",
+        "vue-multiselect": "^2.1.6",
         "vue-router": "^4.1.3",
         "vue-sweetalert2": "^5.0.5"
     }

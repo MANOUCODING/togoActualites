@@ -9,7 +9,7 @@ Header START -->
 		<div class="container">
 			<!-- Logo START -->
 			<router-link class="navbar-brand me-3" to="/">
-				<img class="navbar-brand-item light-mode-item" src="/assets/images/TOgoActualité Final.png" style="height: 50px; width: 250px" alt="logo">				
+				<img class="navbar-brand-item light-mode-item" src="/assets/images/LOGO PNG.png" alt="logo">					
 			</router-link>
 			<!-- Logo END -->
 
@@ -28,12 +28,21 @@ Header START -->
 
 					<!-- Nav item 2 Post -->
 					<li class="nav-item dropdown">
-						<router-link class="nav-link" to="#" id="postMenu"><i class="bi bi-pencil me-1"></i>Articles</router-link>
+						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-pencil me-1"></i>Articles</a>
+						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
+							<li> <router-link class="dropdown-item" to="/admin/articles">Tous les articles</router-link></li>
+							<li> <router-link class="dropdown-item" to="#">Articles par categories</router-link></li>
+							<li> <router-link class="dropdown-item" to="#">Articles par auteur</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/articles/create">Ajouter un article</router-link></li>
+						</ul>
 					</li>
 
 					<!-- Nav item 3 Pages -->
 					<li class="nav-item dropdown">
 						<router-link class="nav-link" to="/admin/category" id="pagesMenu"><i class="bi bi-folder me-1"></i>Catégories</router-link>
+					</li>
+					<li class="nav-item dropdown">
+						<router-link class="nav-link" to="#" id="pagesMenu"><i class="bi bi-folder me-1"></i>Les Utilisateurs</router-link>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Autres</a>
