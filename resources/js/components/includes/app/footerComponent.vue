@@ -6,16 +6,12 @@ Footer START -->
 		<!-- About and Newsletter START -->
 		<div class="row pt-1 pb-4">
 			<div class="col-md-3">
-				<img src="assets/images/TOgoActualité Final.png" alt="footer logo">
+				<router-link class="navbar-brand" to="/">
+					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">
+				</router-link>
 			</div>
 			<div class="col-md-5">
-				<p class="text-muted">
-					Nous sommes Togo Actualité, l’information en temps réel sur le Togo et l’Afrique.
-					Lorem Ipsum, 40C, Lorem Ipsum dummy, Lorem Ipsum, Ch 98054
-					Téléphone: +33 06 14 30 57 86, +228 99 56 57 88
-					Email: contact@togoactualite.com
-					Heures de services: Lundi à Vendredi de 9:30am à 6:30 pm
-				</p>
+
 			</div>
 			<div class="col-md-4">
 				<!-- Form -->
@@ -26,7 +22,7 @@ Footer START -->
 					<div class="col-12">
 						<button type="submit" class="btn btn-primary m-0">Souscrire</button>
 					</div>
-					<div class="form-text mt-2">By subscribing you agree to our 
+					<div class="form-text mt-2">By subscribing you agree to our
 						<a href="#" class="text-decoration-underline text-reset">Privacy Policy</a>
 					</div>
 				</form>
@@ -61,7 +57,7 @@ Footer START -->
 			<div class="col-md-6 col-lg-6 mb-4">
 				<h5 class="mb-4 text-white"> Nos Rubriques</h5>
 				<div class="row">
-					
+
 					<div class="col-4" >
 						<ul class="nav flex-column text-primary-hover">
 							<li class="nav-item"><a class="nav-link pt-0" href="#">A Ne Pas Rater Togo</a></li>
@@ -112,7 +108,7 @@ Footer START -->
 			</div>
 
 			<!-- Footer Widget -->
-			
+
 			<!-- Footer Widget -->
 		</div>
 		<!-- Widgets END -->

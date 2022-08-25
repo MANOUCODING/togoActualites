@@ -7,8 +7,9 @@
 	</div>
 	<div class="offcanvas-body d-flex flex-column pt-0">
 		<div>
-		<img class="navbar-brand-item light-mode-item" src="assets/images/logo.svg" alt="logo">			
-				<img class="navbar-brand-item dark-mode-item" src="assets/images/logo-light.svg" alt="logo">	
+		<router-link class="navbar-brand" to="/">
+            <img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">
+        </router-link> <br>
 			<p>Nous sommes Togo Actualité, l’information en temps réel sur le Togo et l’Afrique. </p>
 			<!-- Nav START -->
 			<ul class="nav d-block flex-column my-4">
@@ -50,7 +51,7 @@ Header START -->
 					<li class="nav-item">
 						<router-link class="nav-link ps-0" to="/about">Qui sommes nous ?</router-link>
 					</li>
-					
+
                     <li class="nav-item">
 						<router-link class="nav-link" to="#">Publicités</router-link>
 					</li>
@@ -62,39 +63,15 @@ Header START -->
 					</li>
 				</ul>
 				<!-- Top bar right -->
-				<div class="d-flex align-items-center">
-					<!-- Font size accessibility START -->
-					<div class="btn-group me-2" role="group" aria-label="font size changer">
-						<input type="radio" class="btn-check" name="fntradio" id="font-sm">
-						<label class="btn btn-xs btn-outline-primary mb-0" for="font-sm">A-</label>
-
-						<input type="radio" class="btn-check" name="fntradio" id="font-default" checked>
-						<label class="btn btn-xs btn-outline-primary mb-0" for="font-default">A</label>
-
-						<input type="radio" class="btn-check" name="fntradio" id="font-lg">
-						<label class="btn btn-xs btn-outline-primary mb-0" for="font-lg">A+</label>
-					</div>
-
-					<!-- Dark mode switch -->
-					<div class="modeswitch" id="darkModeSwitch">
-						<div class="switch"></div>
-					</div>
-
-					<ul class="nav">
-						<li class="nav-item">
-							<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-facebook-square"></i></a>
+				<!-- Top bar right -->
+				<div class="col-sm-4">
+					<ul class="list-inline mb-0 text-center text-sm-end">
+						<li class="list-inline-item">
+							<span>Wed, March 31, 2022</span>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-twitter-square"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-linkedin"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-youtube-square"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link ps-2 pe-0 fs-5" href="#"><i class="fab fa-vimeo"></i></a>
+						<li class="list-inline-item">
+							<i class="bi bi-cloud-hail text-info"></i>
+							<span>13 °C NY, USA</span>
 						</li>
 					</ul>
 				</div>
@@ -103,148 +80,39 @@ Header START -->
 			<div class="border-bottom border-2 border-primary opacity-1"></div>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg">
-			<div class="container-fluid">
-				<router-link class="navbar-brand" to="/">
-					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">						
-				</router-link>								
-				<!-- Nav right START -->
-				<div class="nav flex-nowrap align-items-center">
-					<!-- Nav Button -->
-					<div class="nav-item d-none d-md-block">
-						<router-link to="/login" class="btn  btn-primary mb-0 mx-2">Se connecter</router-link>
-					</div>
-					<div class="nav-item d-none d-md-block">
-						<router-link to="/register" class="btn  btn-danger mb-0 mx-2">S'inscrire</router-link>
-					</div>
-					<!-- Nav Search -->
-					<div class="nav-item dropdown dropdown-toggle-icon-none nav-search">
-						<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-search fs-4"> </i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
-							<form class="input-group">
-								<input class="form-control border-success" type="search" placeholder="Rechercher..." aria-label="Search">
-								<button class="btn btn-success m-0" type="submit">Recherche</button>
-							</form>
-						</div>
-					</div>
-					<!-- Offcanvas menu toggler -->
-
-
-					<!-- Notification dropdown START -->
-				<div class="nav-item ms-2 ms-md-3 dropdown">
-					<!-- Notification button -->
-					<a class="btn btn-primary-soft btn-round mb-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-						<i class="bi bi-bell fa-fw"></i>
-					</a>
-					<!-- Notification dote -->
-					<span class="notif-badge animation-blink"></span>
-
-					<!-- Notification dropdown menu START -->
-					<div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0">
-						<div class="card bg-transparent">
-							<div class="card-header bg-transparent border-bottom p-3 d-flex justify-content-between align-items-center">
-								<h6 class="m-0">Notifications <span class="badge bg-danger bg-opacity-10 text-danger ms-2">2 new</span></h6>
-								<a class="small" href="#">Clear all</a>
-							</div>
-							<div class="card-body p-0">
-								<ul class="list-group list-unstyled list-group-flush">
-									<!-- Notif item -->
-									<li>
-										<a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
-											<div class="me-3">
-												<div class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="avatar">
-												</div>
-											</div>
-											<div>
-                        <h6 class="mb-1">12 new members joined</h6>
-												<span class="small"> <i class="bi bi-clock"></i> 3 min ago</span>
-											</div>
-										</a>
-									</li>
-
-									<!-- Notif item -->
-									<li>
-										<a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
-											<div class="me-3">
-												<div class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
-												</div>
-											</div>
-											<div>
-												<h6 class="mb-1">Larry Lawson deleted account</h6>
-												<span class="small"> <i class="bi bi-clock"></i> 6 min ago</span>
-											</div>
-										</a>
-									</li>
-
-									<!-- Notif item -->
-									<li>
-										<a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
-											<div class="me-3">
-												<div class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
-												</div>
-											</div>
-											<div>
-												<h6 class="mb-1">Byan commented on your post</h6>
-												<span class="small"> <i class="bi bi-clock"></i> 10 min ago</span>
-											</div>
-										</a>
-									</li>
-
-									<!-- Notif item -->
-									<li>
-										<a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
-											<div class="me-3">
-												<div class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
-												</div>
-											</div>
-											<div>
-												<h6 class="mb-1">Settings updated</h6>
-												<span class="small"> <i class="bi bi-clock"></i> Yesterday</span>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<!-- Button -->
-							<div class="card-footer bg-transparent border-0 py-3 text-center position-relative">
-								<a href="#" class="stretched-link">See all incoming activity</a>
-							</div>
-						</div>
-					</div>
-					<!-- Notification dropdown menu END -->
-				</div>
-
-					<div class="nav-item">
-						<a class="nav-link p-0" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-							<i class="bi bi-text-right rtl-flip fs-2" data-bs-target="#offcanvasMenu"> </i>
-						</a>
-					</div>
-				</div>
-				<!-- Nav right END -->
-			</div>
-
-	</nav>
-	<hr style="margin-top: -10px">
-		<!-- Logo Nav START -->
-	<nav class="navbar navbar-expand-lg">
+	<div>
 		<div class="container-fluid">
-			<!-- Logo END -->
+			<div class="d-sm-flex justify-content-sm-between align-items-sm-center my-2">
+				<!-- Logo START -->
+				<router-link class="navbar-brand" to="/">
+					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">
+				</router-link>
+				<!-- Logo END -->
+				<!-- Adv -->
+				<div>
+					<a href="#" class="card-img-flash d-block">
+						<img src="assets/images/adv-2.png" alt="adv">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-			<!-- Responsive navbar toggler -->
-			<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="text-body h6 d-none d-sm-inline-block">MENU</span>
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	<!-- Navbar START -->
+	<div class="navbar-sticky header-static">
+		<nav class="navbar navbar-light navbar-expand-lg">
+			<div class="container-fluid">
+				<div class="w-100 bg-light d-flex">
 
-			<!-- Main navbar START -->
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav navbar-nav-scroll mx-auto">
+					<!-- Responsive navbar toggler -->
+					<button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="text-muted h6 ps-3">MENU</span>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Main navbar START -->
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav navbar-nav-scroll navbar-lh-sm">
 
 					<!-- Nav item 1 Demos -->
 					<li class="nav-item">
@@ -255,7 +123,7 @@ Header START -->
 					<li class="nav-item dropdown dropdown-fullwidth">
 						<a class="nav-link dropdown-toggle" href="#" id="megaMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TOGO ACTUALITÉ</a>
 						<div class="dropdown-menu" aria-labelledby="megaMenu">
-							<div class="container">
+							<div class="container-fluid">
 								<div class="row g-4 p-3 flex-fill">
 									<!-- Card item START -->
 									<div class="col-sm-6 col-lg-3">
@@ -365,7 +233,7 @@ Header START -->
 					<li class="nav-item dropdown dropdown-fullwidth">
 						<a class="nav-link dropdown-toggle" href="#" id="megaMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ECONOMIE</a>
 						<div class="dropdown-menu" aria-labelledby="megaMenu">
-							<div class="container">
+							<div class="container-fluid">
 								<div class="row g-4 p-3 flex-fill">
 									<!-- Card item START -->
 									<div class="col-sm-6 col-lg-3">
@@ -464,7 +332,7 @@ Header START -->
 					<li class="nav-item dropdown dropdown-fullwidth">
 						<a class="nav-link dropdown-toggle" href="#" id="megaMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ECONOMIE</a>
 						<div class="dropdown-menu" aria-labelledby="megaMenu">
-							<div class="container">
+							<div class="container-fluid">
 								<div class="row g-4 p-3 flex-fill">
 									<!-- Card item START -->
 									<div class="col-sm-6 col-lg-3">
@@ -555,23 +423,49 @@ Header START -->
 					<li class="nav-item"> <a class="nav-link" href="dashboard.html">FORUM</a></li>
 
 					<li class="nav-item"> <a class="nav-link" href="dashboard.html">INFOS PRATIQUES</a></li>
-                    
-				</ul>
-			</div>
-			<!-- Main navbar END -->
 
-			<!-- Nav right START -->
-			<!-- Nav right END -->
-		</div>
-	</nav>
-	<!-- Logo Nav END -->
+				</ul>
+					</div>
+					<!-- Main navbar END -->
+
+					<!-- Nav right START -->
+					<div class="nav flex-nowrap align-items-center me-2">
+						<!-- Dark mode switch -->
+						<!-- Nav Search -->
+						<div class="nav-item dropdown nav-search dropdown-toggle-icon-none">
+							<a class="nav-link text-uppercase dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-search fs-4"> </i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
+								<form class="input-group">
+									<input class="form-control border-success" type="search" placeholder="Search" aria-label="Search">
+									<button class="btn btn-success m-0" type="submit">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- Offcanvas menu toggler -->
+						<div class="nav-item">
+							<a class="nav-link pe-0" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+								<i class="bi bi-text-right rtl-flip fs-2" data-bs-target="#offcanvasMenu"> </i>
+							</a>
+						</div>
+					</div>
+					<!-- Nav right END -->
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!-- Navbar END -->
 </header>
+
+<script src="/assets/vendor/tiny-slider/tiny-slider.js"></script>
 <!-- =======================
 Header END -->
 <!-- Offcanvas END -->
 </template>
+
 <script>
 export default {
-  
+
 }
 </script>
