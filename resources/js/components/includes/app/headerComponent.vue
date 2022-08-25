@@ -458,7 +458,6 @@ Header START -->
 	<!-- Navbar END -->
 </header>
 
-<script src="/assets/vendor/tiny-slider/tiny-slider.js"></script>
 <!-- =======================
 Header END -->
 <!-- Offcanvas END -->

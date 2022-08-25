@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Blogzine - Blog and Magazine Bootstrap 5 Theme</title>
+	<title>Acceuil-Togo Actualites</title>
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +10,7 @@
 	<meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="/assets/images/favicon.ico">
+	<link rel="shortcut icon" href="/assets/images/Icone.png">
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
