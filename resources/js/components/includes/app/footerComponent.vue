@@ -1,13 +1,13 @@
 <template>
 <!-- =======================
 Footer START -->
-<footer class="bg-dark pt-5">
-	<div class="container">
+<footer class="bg-dark pt-5" style="background-color: #006633 !important">
+	<div class="container-fluid">
 		<!-- About and Newsletter START -->
 		<div class="row pt-1 pb-4">
 			<div class="col-md-3">
 				<router-link class="navbar-brand" to="/">
-					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">
+					<img class="navbar-brand-item light-mode-item" src="assets/images/blanc.png" style="width: 200px; height: 65px; " alt="logo">
 				</router-link>
 			</div>
 			<div class="col-md-5">
@@ -21,9 +21,6 @@ Footer START -->
 					</div>
 					<div class="col-12">
 						<button type="submit" class="btn btn-primary m-0">Souscrire</button>
-					</div>
-					<div class="form-text mt-2">By subscribing you agree to our
-						<a href="#" class="text-decoration-underline text-reset">Privacy Policy</a>
 					</div>
 				</form>
 			</div>
@@ -119,7 +116,7 @@ Footer START -->
 
 	<!-- Footer copyright START -->
 	<div class="bg-dark-overlay-3 mt-5">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row align-items-center justify-content-md-between py-4">
 				<div class="col-md-6">
 					<!-- Copyright -->
