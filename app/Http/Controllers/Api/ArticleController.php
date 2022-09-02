@@ -40,9 +40,15 @@ class ArticleController extends BaseController
                 'aLaUne' => ['required', 'string'],
                 'publish' => ['required', 'string'],
             ],[
+                'required'=> 'Votre :attribute est obligatoire.',
+                'required.integer'=> 'Votre :attribute doit etre selecttonnée.',
+                'required.string'=> 'Votre :attribute doit etre une chaine de caractère.',
                 'title.required' => 'Le :attribute est obligatoire.'
             ], [
-                'title' => 'titre'
+                'title' => 'titre',
+                'category_id' => 'catégorie',
+                'subtitle' => 'Sous Titre',
+                'content' => 'contenu'
             ]);
 
             if ($validator->fails()) {

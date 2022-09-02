@@ -57,42 +57,79 @@ Contact info START -->
             <div class="row">
               <div class="col-md-6">
                 <!-- name -->
-                <div class="mb-3">
-                  <input required id="con-name" name="name" type="text" class="form-control" placeholder="Noms & Prenom(s)*">
+                <div class="mb-3"  v-if="!errors.nomComplet">
+                  <input required id="con-email" name="nomComplet" v-model="data.nomComplet"  type="text" class="form-control" placeholder="Noms & Prénoms (*)">
+                </div>
+                <div class="mb-3"  v-else>
+                   <input required id="con-email" name="nomComplet" v-model="data.nomComplet"  type="text" class="form-control" placeholder="Noms & Prénoms (*)">
+                  <div  v-for="error_nomComplet in errors.nomComplet" :key="error_nomComplet" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                      {{ error_nomComplet }}
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <!-- email -->
-                <div class="mb-3">
-                  <input required id="con-email" name="telephone" type="number" class="form-control" placeholder="Téléphone">
+               <div class="col-md-6">
+                <!-- name -->
+                <div class="mb-3"  v-if="!errors.telephone">
+                  <input required id="con-email" name="telephone" v-model="data.telephone"  type="number" class="form-control" placeholder="Numero de Télephone">
+                </div>
+                <div class="mb-3"  v-else>
+                   <input required id="con-email" name="telephone" v-model="data.telephone"  type="number" class="form-control" placeholder="Numero de Télephone">
+                  <div  v-for="error_telephone in errors.telephone" :key="error_telephone" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                      {{ error_telephone }}
+                  </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <!-- email -->
-                <div class="mb-3">
-                  <input required id="con-email" name="email" type="email" class="form-control" placeholder="E-mail*">
+                 <div class="mb-3"  v-if="!errors.email">
+                  <input required id="con-email" name="email" v-model="data.email"  type="email" class="form-control" placeholder="Votre email(*)">
+                </div>
+                <div class="mb-3"  v-else>
+                   <input required id="con-email" name="email" v-model="data.email"  type="email" class="form-control" placeholder="Votre email(*)">
+                  <div  v-for="error_email in errors.email" :key="error_email" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                      {{ error_email }}
+                  </div>
                 </div>
               </div>
                <div class="col-md-12">
                 <!-- Subject -->
-                <div class="mb-3">
-                  <input required id="con-subject" name="subject" type="text" class="form-control" placeholder="Site Web">
+                <div class="mb-3"  v-if="!errors.siteweb">
+                  <input required id="con-email" name="siteweb" v-model="data.siteweb"  type="text" class="form-control" placeholder="Votre Site Web (Pas obligatoire)">
+                </div>
+                <div class="mb-3"  v-else>
+                   <input required id="con-email" name="siteweb" v-model="data.siteweb"  type="text" class="form-control" placeholder="Votre Site Web (Pas obligatoire)">
+                  <div  v-for="error_siteweb in errors.siteweb" :key="error_siteweb" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                      {{ error_siteweb }}
+                  </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <!-- Subject -->
-                <div class="mb-3">
-                  <input required id="con-subject" name="subject" type="text" class="form-control" placeholder="Sujet*">
+                <div class="mb-3"  v-if="!errors.sujet">
+                  <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Site Web (Pas obligatoire)">
+                </div>
+                <div class="mb-3"  v-else>
+                   <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Sujet ou requête">
+                  <div  v-for="error_sujet in errors.sujet" :key="error_sujet" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                      {{ error_sujet }}
+                  </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <!-- Message -->
-                <div class="mb-3">
-                  <textarea required id="con-message" name="message" cols="40" rows="6" class="form-control" placeholder="Votre Message...*"></textarea>
-                </div>
+                <div class="mb-3" v-if="!errors.content">
+                    	<ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                  </div>
+                  <div class="mb-3" v-else>
+                    	<ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                       <div  v-for="error_content in errors.content" :key="error_content" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                        {{ error_content }}
+                    </div>
+                  </div>
               </div>
               <!-- submit button -->
-              <div class="col-md-12 text-start"><button class="btn btn-primary w-100" type="submit">Envoyez le message</button></div>
+              <div class="col-md-6 text-start"><button class="btn btn-primary w-100" type="submit">Envoyez le message</button></div>
+              <div class="col-md-6 text-start"><button class="btn btn-success w-100" type="submit">Nous écrire sur Whatsapp</button></div>
             </div>
           </form>
 			  	<!-- Form END -->
@@ -109,9 +146,75 @@ Contact info END -->
     <footerbar> </footerbar>
 </template>
 <script>
-export default {
-  setup() {
-    
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+export default{
+  data () {
+    return {
+      categories: {},
+      data: {
+        nomComplet: null,
+        telephone: null,
+        email: null,
+        content: null,
+        siteweb: null,
+        sujet: null,
+      },
+      editor: ClassicEditor,
+      editorData: '<p>Entrer votre message ici.</p>',
+      editorConfig: {
+          // The configuration of the editor.
+      },
+      empty : null,
+      message: "",
+      loadingSave: false,
+      errorType: false,
+      errorMessage : "",
+      errors: {},
+      load: true,
+    }
   },
+
+  methods: {
+    getResults(){
+      this.load = false
+    },
+     create(){
+
+      this.data.content = this.editorData
+      
+      this.loadingSave = true
+      axios.post('/api/message/store', this.data)
+      .then(response => {
+          console.log(response.data)
+          if(response.status == 200){
+            this.loadingSave = false
+            if (response.data.success == false) {
+              if (response.data.message == "Erreur de validation") {
+                this.errors = response.data.errors
+              }else if(response.data.message == "Ooops Desolé. Vous ne pouvez pas mettre un article à la Une sans le publier"){
+                this.errorcheck = true
+                this.errorsAlert = response.data.message
+              }
+            }else{
+              if (response.data.message == 'Message envoyé avec succès' ) {
+                this.$swal({
+                  title: "Succès!",
+                  text:  response.data.message,
+                  icon: "success",
+                  timer: 1000,
+                  showConfirmButton: false
+                });
+               
+              }
+            }
+          }
+      });
+    },
+   
+  },
+
+  mounted(){
+    this.getResults();
+  }
 }
 </script>

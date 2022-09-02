@@ -92,8 +92,8 @@ export default {
  	data(){
 		return{
 			data:{
-				username: "",
-				password: "",
+				username: "superadmin@togoactualite.com",
+				password: "SuperAdmin@1234",
 			},
 			loading: false,
 			errorType: false,

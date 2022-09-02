@@ -24,13 +24,16 @@ Main contain START -->
 				<div class="card border">
 					<!-- Card body -->
 					<div class="card-body">
+            <div class="alert alert-danger" v-if="errorcheck" role="alert">
+              {{ errorsAlert  }}
+            </div>
             <!-- Form START -->
             <form action="" method="POST" enctype="multipart/form-data">
               <!-- Main form -->
               <div class="row">
                 <div class="col-12">
                   <!-- Post name -->
-                   <div class="mb-3"  v-if="!errors.title">
+                  <div class="mb-3"  v-if="!errors.title">
                     <label class="form-label">Titre de l'article</label>
                     <input class="form-control pe-5 bg-transparent" type="text" name="title" v-model="data.title" placeholder="Entrez le titre de l'article">
                   </div>
@@ -199,7 +202,7 @@ export default{
         aLaUneBoolean: 0,
       },
       editor: ClassicEditor,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: '<p>Entrer votre contenu</p>',
       editorConfig: {
           // The configuration of the editor.
       },
@@ -209,6 +212,8 @@ export default{
       errorType: false,
       errorMessage : "",
       errors: {},
+      errorsAlert: null,
+      errorcheck: false,
       load: true,
       attachement: [],
       form : new FormData
@@ -294,8 +299,8 @@ export default{
                   title: "Succès!",
                   text:  response.data.message,
                   icon: "success",
-                  timer: 1000,
-                  showConfirmButton: false
+                  timer: 6000,
+                  showConfirmButton: true
                 });
                 this.$router.push({name:"articles.all"})
               }

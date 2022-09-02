@@ -438,8 +438,8 @@ Header START -->
 							</a>
 							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
 								<form class="input-group">
-									<input class="form-control border-success" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-success m-0" type="submit">Search</button>
+									<input class="form-control border-success" type="search" placeholder="Rechercher....." aria-label="Search">
+									<button class="btn btn-success m-0" type="submit">Recherche</button>
 								</form>
 							</div>
 						</div>
