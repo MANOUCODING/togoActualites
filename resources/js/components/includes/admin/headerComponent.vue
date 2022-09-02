@@ -6,10 +6,10 @@ Header START -->
 <header class="navbar-light navbar-sticky header-static border-bottom navbar-dashboard">
 	<!-- Logo Nav START -->
 	<nav class="navbar navbar-expand-xl">
-		<div class="container">
+		<div class="container-fluid">
 			<!-- Logo START -->
 			<router-link class="navbar-brand me-3" to="/">
-				<img class="navbar-brand-item light-mode-item" src="/assets/images/LOGO PNG.png" alt="logo">					
+				<img class="navbar-brand-item light-mode-item" src="/assets/images/LOGO PNG.png" alt="logo">
 			</router-link>
 			<!-- Logo END -->
 
@@ -54,7 +54,7 @@ Header START -->
 						</ul>
 					</li>
 				</ul>
-				
+
 				<!-- Search dropdown START -->
 				<!-- Search dropdown END -->
 			</div>
@@ -184,7 +184,7 @@ Header START -->
 								<i class="bi bi-power fa-fw me-2"></i>Deconnexion en cours ...
 							</a>
 							<a class="dropdown-item" href="#" @click="logout" v-else>
-								<i class="bi bi-power fa-fw me-2"></i>Deconnexion 
+								<i class="bi bi-power fa-fw me-2"></i>Deconnexion
 							</a>
 						</li>
 						<li class="dropdown-divider mb-3"></li>
@@ -229,7 +229,7 @@ export default {
 						if(response.status == 200){
 							if(response.data.success == false){
 								if (response.data.message == "Erreur de validation") {
-									
+
 								}
 							}else{
 								this.loading = false

@@ -1,5 +1,5 @@
 <template>
- 
+
     <adminheaderbar> </adminheaderbar>
 
 <!-- **************** MAIN CONTENT START **************** -->
@@ -46,9 +46,9 @@ Main contain START -->
                   </div>
                 </div>
                 <!-- Post type START -->
-               
+
               <!-- Post type END -->
-              
+
               <!-- Short description -->
               <div class="col-12">
                  <div class="mb-3"  v-if="!errors.subtitle">
@@ -85,7 +85,7 @@ Main contain START -->
                   <div class="position-relative">
                     <h6 class="my-2">Inserez vos fichiers ici</h6>
                     <label class="w-100" style="cursor:pointer;">
-                      <span> 
+                      <span>
                         <input type="file" multiple @change="fieldChange" name="files[]" label="Déposez les fichiers ici ou cliquez pour uploader" help="Uploader des fichiers ici et ils ne seront pas envoyés immédiatement" is="drop-files" />
                       </span>
                     </label>
@@ -288,7 +288,8 @@ export default{
             this.loadingSave = false
             if (response.data.success == false) {
               if (response.data.message == "Erreur de validation") {
-                this.errors = response.data.errors
+                 this.errorcheck = true
+                this.errorsAlert = "Erreur de validation. Veuillez verifiez vos champs que vous avez saisie"
               }else if(response.data.message == "Ooops Desolé. Vous ne pouvez pas mettre un article à la Une sans le publier"){
                 this.errorcheck = true
                 this.errorsAlert = response.data.message
