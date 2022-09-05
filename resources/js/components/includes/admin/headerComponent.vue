@@ -47,7 +47,7 @@ Header START -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Autres</a>
 						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-							<li> <router-link class="dropdown-item" to="#">Messages</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/messages">Messages</router-link></li>
 							<li> <router-link class="dropdown-item" to="#">Commentaires</router-link></li>
 							<li> <router-link class="dropdown-item" to="#">NewsLetters</router-link></li>
 							<li> <router-link class="dropdown-item" to="#">Visites</router-link></li>

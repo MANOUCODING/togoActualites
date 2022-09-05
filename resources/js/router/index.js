@@ -11,9 +11,11 @@ import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
 import CategoryComponent from '../components/admin/CategoryComponent.vue';
 
+import MessageComponent from '../components/admin/Messages/MessageComponent.vue';
+
 //Gestion des articles
 
-import ArticlesAllComponent from '../components/admin/Articles/ArticlesAllComponent.vue';
+import ArticlesPublishComponent from '../components/admin/Articles/ArticlesPublishComponent.vue';
 
 import CreateArticlesComponent from '../components/admin/Articles/Actions/CreateArticlesComponent.vue';
 
@@ -40,20 +42,20 @@ const routes = [
     component: ContactComponent,
     name: 'contact'
   },
- 
+
 
   {
     path: '/login',
     component: LoginComponent,
     name: 'login'
-  },  
+  },
 
   {
     path: '/register',
     component: RegisterComponent,
     name: 'register'
-  },  
-  
+  },
+
 
   {
     path: '/admin/dashboard',
@@ -68,8 +70,14 @@ const routes = [
   },
 
   {
+    path: '/admin/messages',
+    component:  MessageComponent,
+    name: 'messages'
+  },
+
+  {
     path: '/admin/articles',
-    component:  ArticlesAllComponent,
+    component:  ArticlesPublishComponent,
     name: 'articles.all'
   },
 
@@ -78,7 +86,7 @@ const routes = [
     component:  CreateArticlesComponent,
     name: 'articles.create'
   },
-  
+
 
 ];
 
