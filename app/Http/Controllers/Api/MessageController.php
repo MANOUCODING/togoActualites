@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -60,7 +61,7 @@ class MessageController extends Controller
         $message = Message::create($datas);
        
 
-        return $this->sendResponse($message, 'Votre Compte a ete cree avec succes.');
+        return $this->sendResponse($message, 'Message envoyé avec succès');
 
     }
 

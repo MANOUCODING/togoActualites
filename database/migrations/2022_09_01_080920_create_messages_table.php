@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->string('nomComplet');
             $table->string('sujet');
-            $table->string('siteweb');
+            $table->string('siteweb')->nullable();
             $table->string('telephone');
             $table->string('email');
             $table->string('content');
