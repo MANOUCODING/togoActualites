@@ -51,6 +51,9 @@ Contact info START -->
           <div class="col-12">
           <h2>NOUS ENVOYER UN MESSAGE</h2>
           <p>Pour nous contacter veuillez utiliser le formulaire ci-dessous.</p>
+          <div class="alert alert-danger" v-if="errorcheck" role="alert">
+              {{ errorsAlert  }}
+            </div>
           <!-- Form START -->
           <form class="contact-form" id="contact-form" name="contactform" method="POST">
             <!-- Main form -->
@@ -106,10 +109,10 @@ Contact info START -->
               <div class="col-md-12">
                 <!-- Subject -->
                 <div class="mb-3"  v-if="!errors.sujet">
-                  <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Site Web (Pas obligatoire)">
+                  <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Sujet ou Requête">
                 </div>
                 <div class="mb-3"  v-else>
-                   <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Sujet ou requête">
+                   <input required id="con-email" name="sujet" v-model="data.sujet"  type="text" class="form-control" placeholder="Votre Sujet ou Requête">
                   <div  v-for="error_sujet in errors.sujet" :key="error_sujet" class="invalid-feedback" style="color: red; font-size: 0.9em">
                       {{ error_sujet }}
                   </div>
@@ -128,7 +131,13 @@ Contact info START -->
                   </div>
               </div>
               <!-- submit button -->
-              <div class="col-md-6 text-start"><button class="btn btn-primary w-100" type="submit">Envoyez le message</button></div>
+              <div class="col-md-6 text-start">
+                <button class="btn btn-primary w-100" v-if="!loadingSave" type="submit" @click.prevent="send">
+                  Envoyez le message
+                </button>
+                <button class="btn btn-primary w-100" v-else >Envoie de votre message en cours.....</button>
+                </div>
+              
               <div class="col-md-6 text-start"><button class="btn btn-success w-100" type="submit">Nous écrire sur Whatsapp</button></div>
             </div>
           </form>
@@ -168,6 +177,8 @@ export default{
       message: "",
       loadingSave: false,
       errorType: false,
+      errorsAlert: null,
+      errorcheck: false,
       errorMessage : "",
       errors: {},
       load: true,
@@ -178,7 +189,7 @@ export default{
     getResults(){
       this.load = false
     },
-     create(){
+    send(){
 
       this.data.content = this.editorData
       
@@ -191,6 +202,8 @@ export default{
             if (response.data.success == false) {
               if (response.data.message == "Erreur de validation") {
                 this.errors = response.data.errors
+                 this.errorcheck = true
+                this.errorsAlert = response.data.message
               }else if(response.data.message == "Ooops Desolé. Vous ne pouvez pas mettre un article à la Une sans le publier"){
                 this.errorcheck = true
                 this.errorsAlert = response.data.message

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,10 @@ Route::post('/category/store', [CategoryController::class, 'store'])->name('stor
 Route::get('/articles/create', [ArticleController::class, 'create']);
 
 Route::post('/articles/store', [ArticleController::class, 'store']);
+
+
+//Gestion Message
+
+Route::post('/message/store', [MessageController::class, 'store']);
+
 
