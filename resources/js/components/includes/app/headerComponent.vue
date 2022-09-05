@@ -14,7 +14,7 @@
 			<!-- Nav START -->
 			<ul class="nav d-block flex-column my-4">
 				<li class="nav-item h5">
-					<router-link class="nav-link" to="/">Accueil</router-link>
+					<a class="nav-link" href="/">Accueil</a>
 				</li>
 				<li class="nav-item h5">
 					<router-link class="nav-link" to="/about">Qui Sommes nous</router-link>
@@ -84,9 +84,9 @@ Header START -->
 		<div class="container-fluid">
 			<div class="d-sm-flex justify-content-sm-between align-items-sm-center my-2">
 				<!-- Logo START -->
-				<router-link class="navbar-brand" to="/">
+				<a class="navbar-brand" href="/">
 					<img class="navbar-brand-item light-mode-item" src="assets/images/LOGO PNG.png" style="width: 200px; height: 65px;" alt="logo">
-				</router-link>
+				</a>
 				<!-- Logo END -->
 				<!-- Adv -->
 				<div>
@@ -116,7 +116,7 @@ Header START -->
 
 					<!-- Nav item 1 Demos -->
 					<li class="nav-item">
-						<a class="nav-link active" href="#" id="homeMenu">Accueil</a>
+						<a class="nav-link active" href="/" id="homeMenu">Accueil</a>
 					</li>
 
 					<!-- Nav item 2 Pages -->

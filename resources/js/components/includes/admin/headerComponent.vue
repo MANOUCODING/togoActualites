@@ -8,9 +8,9 @@ Header START -->
 	<nav class="navbar navbar-expand-xl">
 		<div class="container-fluid">
 			<!-- Logo START -->
-			<router-link class="navbar-brand me-3" to="/">
+			<a class="navbar-brand me-3" href="/">
 				<img class="navbar-brand-item light-mode-item" src="/assets/images/LOGO PNG.png" alt="logo">
-			</router-link>
+			</a>
 			<!-- Logo END -->
 
 			<!-- Responsive navbar toggler -->

@@ -140,7 +140,13 @@ export default {
 							}else{
 								if (response.data.message == "ESPACE SUPER ADMINISTRATION") {
 									this.loading = false
-									this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Vous êtes maintenant connectés </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
+									this.$swal({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Vous êtes maintenant connectés',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
 
 									this.$router.push({name:"dashboard"})
 								} else if(response.data.message == "ESPACE PUBLICATEUR ARTICLE") {

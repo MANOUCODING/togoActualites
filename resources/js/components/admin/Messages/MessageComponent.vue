@@ -16,37 +16,29 @@ Main contain START -->
 		<div v-else class="row g-4">
 
     <div class="col-12" v-if="addCategoryButton">
-				<!-- Latest blog START -->
-				<div class="card border bg-transparent rounded-3">
-					<!-- Card header -->
-						<div class="card-header bg-transparent border-bottom p-3">
+        <!-- Latest blog START -->
+        <div class="card border bg-transparent rounded-3">
+            <!-- Card header -->
+            <div class="card-header bg-transparent border-bottom p-3">
               <div class="d-sm-flex justify-content-between align-items-center">
-                <h5 class="mb-2 mb-sm-0">Voir un  message</h5>
+                <h5 class="mb-2 mb-sm-0"> Voir le message de {{ data.nomComplet  }}</h5>
                 <a href="#" class="btn btn-sm btn-danger mb-0" @click="closeAddCategory">Fermer</a>
               </div>
-					  </div>
-            <div class="card-body">
-              <form class="rounded position-relative">
-                <div class="row">
-                  <div class="col-md-9"  v-if="!errors.categoryName">
-                    <input class="form-control pe-5 bg-transparent" type="text" name="categoryName" v-model="data.categoryName" placeholder="Entrez le nom de la catégorie">
-                  </div>
-                  <div class="col-md-9"  v-else>
-                    <input class="form-control pe-5 bg-transparent is-invalid" name="categoryName" v-model="data.categoryName" type="text" placeholder="Entrez le nom de la catégorie">
-                    <div  v-for="error_categoryName in errors.categoryName" :key="error_categoryName" class="invalid-feedback" style="color: red; font-size: 0.9em">
-                        {{ error_categoryName }}
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <a href="#" class="btn btn-primary mb-0" v-if="loading">Enregistrement en cours...</a>
-                     <a href="#" class="btn btn-primary mb-0" v-else @click.prevent="saveCategory">Enregistrez</a>
-                  </div>
-                </div>
-              </form>
             </div>
-				</div>
+            <div class="card-body">
+                <h4>Message de  {{ data.nomComplet  }}</h4>
+                <h5>Email: &nbsp; {{ data.email  }} </h5>
+                <h5>Telephone:&nbsp; {{ data.telephone  }}</h5>
+                <h5>Site Web: &nbsp; <a href="#">{{ data.siteweb  }}</a>  </h5>
+                <hr>
+                <h5>Sujet: {{ data.sujet  }} </h5>
+                <h5>Contenu du Message: </h5>
+                <hr>
+                <p v-html="data.content"></p>
+            </div>
+        </div>
 				<!-- Latest blog END -->
-			</div>
+    </div>
 
       <div class="col-12">
 				<!-- Blog list table START -->
@@ -54,8 +46,7 @@ Main contain START -->
 					<!-- Card header START -->
 					<div class="card-header bg-transparent border-bottom p-3">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h5 class="mb-2 mb-sm-0">Mes Messages <span class="badge bg-primary bg-opacity-10 text-primary">105</span></h5>
-							<a href="#" class="btn btn-sm btn-primary mb-0" @click="addCategory" v-if="!addCategoryButton">Ajouter une catégorie</a>
+							<h5 class="mb-2 mb-sm-0">Mes Messages <span class="badge bg-primary bg-opacity-10 text-primary">{{ infos.messagesCount  }}</span></h5>
 						</div>
 					</div>
 					<!-- Card header END -->
@@ -86,16 +77,48 @@ Main contain START -->
 										<th scope="col" class="border-0">Telephone</th>
                                         <th scope="col" class="border-0">Email</th>
                                         <th scope="col" class="border-0">Sujet</th>
+                                        <th scope="col" class="border-0">Envoyé le</th>
 										<th scope="col" class="border-0 rounded-end">Actions</th>
 									</tr>
 								</thead>
 
 								<!-- Table body START -->
-								<tbody class="border-top-0" v-for="info in infos.data" :key="info.id" >
+								<tbody class="border-top-0" v-for="info in infos.messages.data" :key="info.id" >
 									<!-- Table item -->
 									<tr>
 										<!-- Table data -->
+										<td>
+											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#"> {{ info.id }}</a></h6>
+										</td>
+										<!-- Table data -->
+										<td>
+											<h6 class="mb-0"><a href="#">{{ info.nomComplet }}</a></h6>
+										</td>
+										<!-- Table data -->
+										<td v-if="info.telephone">{{ info.telephone }}</td>
+                                        <td v-else>Pas de numero</td>
+										<!-- Table data -->
+										<td v-if="info.email">
+											{{ info.email }}
+										</td>
 
+                                        <td v-else>
+											Pas d'email
+										</td>
+										<!-- Table data -->
+                                        <td>
+											<h6 class="mb-0"><a href="#">{{ info.sujet }}</a></h6>
+										</td>
+										<td>
+											<span class="badge bg-success bg-opacity-10 text-info mb-2"> {{ moment(info.created_at).format(" MMM DD, YYYY") }}</span>
+										</td>
+										<!-- Table data -->
+										<td>
+                                            <div class="d-flex gap-2">
+                                                <a href="#" class="btn btn-danger btn-round mb-0" @click="deleteMessage(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimez cet message"><i class="bi bi-trash"></i></a>
+                                                <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Repondre a ce message"  @click="AnswerMessage(info.id)" v-if="!addCategoryButton"><i class="bi bi-send-fill"></i></a>
+                                            </div>
+										</td>
 									</tr>
 
 								</tbody>
@@ -142,14 +165,17 @@ export default {
       return {
         infos: {},
         data: {
-          id: null,
-          categoryName: null,
-          sousCategoryBoolean: 0,
+            id: null,
+            nomComplet: null,
+            telephone: null,
+            email: null,
+            content: null,
+            siteweb: null,
+            sujet: null,
         },
         empty : null,
         message: "",
         addCategoryButton: false,
-        updateCategoryButton: false,
         loading: false,
         errorType: false,
         errorMessage : "",
@@ -160,15 +186,16 @@ export default {
   methods: {
     getResults(page = 1){
       axios
-        .get('/api/category?page=' + page)
+        .get('/api/messages?page=' + page)
         .then(response => {
           this.load = false
           if(response.status == 200){
             if (response.data.success == false) {
             }else{
-              if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
+              if (response.data.message == 'Aucun message n\'est enregistrée.') {
                 this.empty = 1
                 this.message = response.data.message
+                this.infos = response.data.data
               } else {
                 this.empty = 0
                 this.infos = response.data.data
@@ -178,81 +205,16 @@ export default {
       });
     },
 
-    saveCategory(){
-      this.loading = true
-      this.errors = {}
-      this.errorType = false
-      this.errorMessage  = ""
-      axios.post('/api/category/store',{
-        categoryName : this.data.categoryName,
-        sousCategoryBoolean: this.data.sousCategoryBoolean ? 1 : 0
-      })
-      .then(response =>{
-          if(response.status == 200){
 
-            if(response.data.success == false){
-              if (response.data.message == "Erreur de validation") {
-                this.loading = false
-                this.errors = response.data.errors
-              }
-            }else{
-              if (response.data.message == "Votre catégorie a ete créée avec succès.") {
-                this.loading = false
-                this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Votre catégorie a ete créée avec succès. </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
-                this.getResults();
-              }
-            }
-          }
-        }
-      ).catch(error =>{
-        console.dir(error)
-      })
-      this.data.categoryName = null
-      this.data.sousCategoryBoolean = 0
-    },
-
-    update(id){
-      this.loading = true
-      this.errors = {}
-      this.errorType = false
-      this.errorMessage  = ""
-      axios.put(`/api/category/${id}/update`,{
-        categoryName : this.data.categoryName,
-      })
-      .then(response =>{
-          if(response.status == 200){
-
-            if(response.data.success == false){
-              if (response.data.message == "Erreur de validation") {
-                this.loading = false
-                this.errors = response.data.errors
-              }
-            }else{
-              if (response.data.message == "Votre catégorie a été modifiée avec succès.") {
-                this.loading = false
-                this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Votre catégorie a été modifiée avec succès. </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
-                this.getResults();
-              }
-            }
-          }
-        }
-      ).catch(error =>{
-        console.dir(error)
-      })
-      this.data.categoryName = null
-      this.addCategoryButton = false
-    },
-
-    updateCategory(id){
-      this.updateCategoryButton = true;
-      this.addCategoryButton = false;
+    AnswerMessage(id){
+      this.addCategoryButton = true;
       axios
-        .get(`/api/category/${id}`)
+        .get(`/api/messages/${id}`)
         .then(response => {
           if(response.status == 200){
             if (response.data.success == false) {
             }else{
-              if (response.data.message == 'Aucune catégrie trouvée.') {
+              if (response.data.message == 'Aucun message trouvé.') {
                 this.empty = 1
                 this.message = response.data.message
               } else {
@@ -266,27 +228,19 @@ export default {
 
     },
 
-    closeUpdateCategory(){
-      this.updateCategoryButton = false;
-    },
 
     addCategory(){
       this.addCategoryButton = true;
-      this.updateCategoryButton = false;
     },
 
     closeAddCategory(){
       this.addCategoryButton = false;
     },
 
-    sousCategoryBooleanH(){
-       this.data.sousCategoryBoolean = 0
-    },
-
-    deleteCategory(id) {
+    deleteMessage(id) {
        this.$swal({
         title: "Etes-vous sûr?",
-        text: "Vous ne pourrez plus récupérer ces actualités!",
+        text: "Vous ne pourrez plus récupérer ce message!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "blue",
@@ -297,23 +251,24 @@ export default {
       }).then((confirmed) => {
         if (confirmed.isConfirmed) {
           axios
-          .delete(`/api/category/${id}`)
+          .delete(`/api/message/${id}`)
           .then(response => {
               this.getResults();
-                if (response.data.message == 'La categorie a été supprimée avec succès.') {
+                if (response.data.message == 'Le message a été supprimé avec succès.') {
                   this.$swal({
-                      title: "Succès!",
-                      text: response.data.message,
-                      icon: "success",
-                      timer: 1000,
-                      showConfirmButton: false
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
                   });
               } else {
                   this.$swal({
-                      title: "Erreur",
-                      text: response.data.message,
-                      icon: "error",
-                      timer: 1000
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
                   });
               }
           });

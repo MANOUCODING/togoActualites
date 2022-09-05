@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,18 @@ class MessageController extends BaseController
      */
     public function index()
     {
-        //
+       $messagesCount = Message::count();
+
+        if ($messagesCount == 0) {
+
+            return $this->sendResponse(['messagesCount' => $messagesCount ], 'Aucun message n\'est enregistrée.');
+
+        } else {
+
+            $messages= Message::paginate(10);
+
+            return $this->sendResponse(['messages'=> $messages, 'messagesCount' => $messagesCount ], 'Liste de tous les messages.');
+        }
     }
 
     /**
@@ -56,10 +68,10 @@ class MessageController extends BaseController
             return $this->sendError('Erreur de validation', $validator->errors());
 
         }
-       
+
 
         $message = Message::create($datas);
-       
+
 
         return $this->sendResponse($message, 'Message envoyé avec succès');
 
@@ -74,7 +86,17 @@ class MessageController extends BaseController
      */
     public function show($id)
     {
-        //
+        try {
+
+            $messageShow = Message::findOrFail($id);
+
+            return $this->sendResponse($messageShow, 'Votre message a été selectionné.');
+
+        } catch (ModelNotFoundException $modelNotFoundException){
+
+            return $this->sendError('Aucun message trouvé');
+
+        }
     }
 
     /**
@@ -97,6 +119,10 @@ class MessageController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $message = Message::findOrFail($id);
+
+        $message->delete();
+
+        return $this->sendResponse($message, "Le message a été supprimé avec succès.");
     }
 }

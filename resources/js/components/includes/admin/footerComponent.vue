@@ -35,6 +35,8 @@ Footer END -->
 <!-- Back to top -->
 <div class="back-top"><i class="bi bi-arrow-up-short"></i></div>
 
+<div class="back-top"><i class="bi bi-whatsapp"></i></div>
+
 </template>
 
 <script>

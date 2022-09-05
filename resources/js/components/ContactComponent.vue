@@ -1,5 +1,5 @@
 <template>
-  
+
 <headerbar> </headerbar>
     <!-- =======================Trending END -->
     <main>
@@ -16,7 +16,7 @@ Inner intro START -->
             <li class="breadcrumb-item"><router-link to="/"><i class="bi bi-house me-1"></i> Accueil</router-link></li>
             <li class="breadcrumb-item active">Nous Ecrire</li>
           </ol>
-        </nav>      
+        </nav>
       </div>
     </div>
 	</div>
@@ -44,9 +44,9 @@ Contact info START -->
             </p>
           </div>
         </div>
-        
+
         <hr class="my-5">
-        
+
         <div class="row">
           <div class="col-12">
           <h2>NOUS ENVOYER UN MESSAGE</h2>
@@ -133,12 +133,12 @@ Contact info START -->
               <!-- submit button -->
               <div class="col-md-6 text-start">
                 <button class="btn btn-primary w-100" v-if="!loadingSave" type="submit" @click.prevent="send">
-                  Envoyez le message
+                 <i class="bi bi-send-fill"></i> Envoyez le message
                 </button>
                 <button class="btn btn-primary w-100" v-else >Envoie de votre message en cours.....</button>
                 </div>
-              
-              <div class="col-md-6 text-start"><button class="btn btn-success w-100" type="submit">Nous écrire sur Whatsapp</button></div>
+
+              <div class="col-md-6 text-start"><button class="btn btn-success w-100" @click="whatsappWeb" type="submit"><i class="bi bi-whatsapp"></i>Nous écrire sur Whatsapp</button></div>
             </div>
           </form>
 			  	<!-- Form END -->
@@ -192,7 +192,7 @@ export default{
     send(){
 
       this.data.content = this.editorData
-      
+
       this.loadingSave = true
       axios.post('/api/message/store', this.data)
       .then(response => {
@@ -211,19 +211,25 @@ export default{
             }else{
               if (response.data.message == 'Message envoyé avec succès' ) {
                 this.$swal({
-                  title: "Succès!",
-                  text:  response.data.message,
-                  icon: "success",
-                  timer: 1000,
-                  showConfirmButton: false
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
                 });
-               
+
               }
             }
           }
       });
     },
-   
+
+     whatsappWeb() {
+        let routeData = `https://wa.link/x3ae2z`
+        window.open(routeData, '_blank');
+    },
+
+
   },
 
   mounted(){

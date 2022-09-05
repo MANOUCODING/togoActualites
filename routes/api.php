@@ -55,5 +55,7 @@ Route::post('/articles/store', [ArticleController::class, 'store']);
 //Gestion Message
 
 Route::post('/message/store', [MessageController::class, 'store']);
-
+Route::get('/messages', [MessageController::class, 'index']);
+Route::get('/messages/{id}', [MessageController::class, 'show']);
+Route::delete('/message/{id}', [MessageController::class, 'destroy']);
 
