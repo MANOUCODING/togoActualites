@@ -20,7 +20,7 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -91,7 +91,7 @@ class ArticleController extends BaseController
             }
         }
 
-        
+
 
         return $this->sendResponse($uploadFiles, 'L\'article a été enregistré avec succès.');
     }
