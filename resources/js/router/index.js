@@ -13,6 +13,8 @@ import CategoryComponent from '../components/admin/CategoryComponent.vue';
 
 import MessageComponent from '../components/admin/Messages/MessageComponent.vue';
 
+import VisitesComponent from '../components/admin/Visites/VisitesComponent.vue';
+
 //Gestion des articles
 
 import ArticlesPublishComponent from '../components/admin/Articles/ArticlesPublishComponent.vue';
@@ -73,6 +75,12 @@ const routes = [
     path: '/admin/messages',
     component:  MessageComponent,
     name: 'messages'
+  },
+
+  {
+    path: '/admin/visites',
+    component:  VisitesComponent,
+    name: 'visites'
   },
 
   {

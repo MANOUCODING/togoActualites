@@ -48,9 +48,9 @@ Header START -->
 						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-folder me-1"></i>Autres</a>
 						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 							<li> <router-link class="dropdown-item" to="/admin/messages">Messages</router-link></li>
+                            <li> <router-link class="dropdown-item" to="#">NewsLetters</router-link></li>
 							<li> <router-link class="dropdown-item" to="#">Commentaires</router-link></li>
-							<li> <router-link class="dropdown-item" to="#">NewsLetters</router-link></li>
-							<li> <router-link class="dropdown-item" to="#">Visites</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/visites">Visites</router-link></li>
 						</ul>
 					</li>
 				</ul>
@@ -90,7 +90,7 @@ Header START -->
 												</div>
 											</div>
 											<div>
-                        <h6 class="mb-1">12 new members joined</h6>
+                                                <h6 class="mb-1">12 new members joined</h6>
 												<span class="small"> <i class="bi bi-clock"></i> 3 min ago</span>
 											</div>
 										</a>

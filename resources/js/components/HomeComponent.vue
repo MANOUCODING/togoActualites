@@ -1,11 +1,9 @@
 <template>
-    <div v-if="load" style="display: block; margin-left: auto; margin-right: auto; margin-top: 20%;" class="conteneur_general_load_10">
-    <img src="assets/images/TOgoActualité Final.png" style="width: 210px; text-align: center" alt=""> <br> <br>
-    <div class="cle_bleu_load_10" style="margin-left: auto; margin-right: auto"></div>
-</div>
-    <headerbar> </headerbar>
+
+
+    <headerbar > </headerbar>
     <!-- =======================Trending END -->
-    <main>
+    <main >
 
 <!-- =======================
 Main hero START -->
@@ -3492,6 +3490,7 @@ Section END -->
     <footerbar> </footerbar>
 
 </template>
+
 <script>
 export default {
   data(){
@@ -3502,7 +3501,23 @@ export default {
 	},
     methods: {
          getResults(){
-            this.load = false
+            axios.post('/api/visites/create' )
+                .then(response => {
+                    console.log(response.data)
+                this.load = false
+                if(response.status == 200){
+                    if (response.data.success == false) {
+                    }else{
+                    if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
+                        this.empty = 1
+                        this.message = response.data.message
+                    } else {
+                        this.empty = 0
+                        this.infos = response.data.data
+                    }
+                    }
+                }
+            });
         },
     },
     mounted() {

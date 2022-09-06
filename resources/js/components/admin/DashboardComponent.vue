@@ -1,5 +1,5 @@
 <template>
- 
+
     <adminheaderbar> </adminheaderbar>
 
 <!-- **************** MAIN CONTENT START **************** -->
@@ -14,7 +14,7 @@ Main contain START -->
 			<div class="col-12">
 				<!-- Counter START -->
 				<div class="row g-4">
-					
+
 					<!-- Counter item -->
 					<div class="col-sm-6 col-lg-3">
 						<div class="card card-body border p-3">
@@ -87,7 +87,7 @@ Main contain START -->
 				<!-- Counter END -->
 			</div>
 
-			
+
 
 			<div class="col-md-6 col-xxl-4">
 				<!-- Latest blog START -->
@@ -662,10 +662,10 @@ Main contain START -->
 										</td>
 										<!-- Table data -->
 										<td>
-                      <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      </div>
+                                            <div class="d-flex gap-2">
+                                                <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
+                                                <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                            </div>
 										</td>
 									</tr>
 
@@ -691,10 +691,10 @@ Main contain START -->
 										</td>
 										<!-- Table data -->
 										<td>
-                      <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      </div>
+                                            <div class="d-flex gap-2">
+                                                <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
+                                                <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                            </div>
 										</td>
 									</tr>
 
@@ -742,6 +742,6 @@ Main contain END -->
 </template>
 <script>
 export default {
- 
+
 }
 </script>
