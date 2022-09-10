@@ -87,7 +87,7 @@ Main contain START -->
 					<!-- Card header START -->
 					<div class="card-header bg-transparent border-bottom p-3">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h5 class="mb-2 mb-sm-0">Mes catégories <span class="badge bg-primary bg-opacity-10 text-primary">105</span></h5>
+							<h5 class="mb-2 mb-sm-0">Mes catégories <span class="badge bg-primary bg-opacity-10 text-primary">{{ infos.categoryCount  }}</span></h5>
 							<a href="#" class="btn btn-sm btn-primary mb-0" @click="addCategory" v-if="!addCategoryButton">Ajouter une catégorie</a>
 						</div>
 					</div>
@@ -114,9 +114,9 @@ Main contain START -->
 								<!-- Table head -->
 								<thead class="table-dark">
 									<tr>
-										<th scope="col" class="border-0 rounded-start">#</th>
+										
 										<th scope="col" class="border-0">Nom de la catégorie</th>
-										<th scope="col" class="border-0">Actualités</th>
+										<th scope="col" class="border-0">Articles</th>
 										<th scope="col" class="border-0">Status</th>
                     <th scope="col" class="border-0">Ajouté le </th>
 										<th scope="col" class="border-0 rounded-end">Action</th>
@@ -124,20 +124,16 @@ Main contain START -->
 								</thead>
 
 								<!-- Table body START -->
-								<tbody class="border-top-0" v-for="info in infos.data" :key="info.id" >
+								<tbody class="border-top-0" v-for="info in infos.categories.data" :key="info.id" >
 									<!-- Table item -->
 									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#"> {{ info.id }}</a></h6>
-										</td>
 										<!-- Table data -->
 										<td>
 											<h6 class="mb-0"><a href="#">{{ info.categoryName }}</a></h6>
 										</td>
 										<!-- Table data -->
-										<td v-if="info.sousCategoryBoolean">5 actualités</td>
-                    <td v-else>Pas d' actualités</td>
+										<td v-if="info.countArticles == 0"><a href="#" style="color: #fff" class="badge text-bg-danger mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> Pas d'articles </a></td>
+                    <td v-else><a href="#" style="color: #fff" class="badge text-bg-primary mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> {{ info.countArticles }} article(s) </a></td>
 										<!-- Table data -->
 										<td v-if="info.status">
 											<a href="#" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Active</a>

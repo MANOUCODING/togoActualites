@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,194 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-       
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse($categoryCount, 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $categories = Category::paginate(10);
+
+            return $this->sendResponse($categories, 'Liste de toutes les categories.');
+        }
+        
+    }
+
+    public function publish()
+    {
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse(['categoryCount' => $categoryCount, 'infosArticlesCount' => 0], 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $articleCount = Article::count();
+
+            if ($articleCount == 0) {
+    
+                return $this->sendResponse(['articleCount' => $articleCount, 'infosArticlesCount' => 0], 'Aucun article n\'est enregistré.');
+    
+            }else{
+                $articlePublishCount = Article::where('publish', '=', "OUI PUBLIE")->count();
+
+                if ($articlePublishCount == 0) {
+        
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount], 'Aucun article publié n\'est enregistré.');
+        
+                }else{
+
+                    $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.date_publish" , "categories.id" , "categories.categoryName as category"))
+                    ->where('articles.publish', '=', "OUI PUBLIE")
+                    ->leftJoin("categories", "categories.id", "=", "articles.category_id")
+                    ->orderBy('articles.id', 'desc')
+                    ->paginate(10);
+
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount, 'infosArticles' => $articlePublish], 'Liste des articles publiés');
+                }
+            }
+        }
+    }
+
+    public function notPublish()
+    {
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse(['categoryCount' => $categoryCount, 'infosArticlesCount' => 0], 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $articleCount = Article::count();
+
+            if ($articleCount == 0) {
+    
+                return $this->sendResponse(['articleCount' => $articleCount, 'infosArticlesCount' => 0], 'Aucun article n\'est enregistré.');
+    
+            }else{
+                $articlePublishCount = Article::where('publish', '=', "NON PUBLIE")->count();
+
+                if ($articlePublishCount == 0) {
+        
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount], 'Aucun article publié n\'est enregistré.');
+        
+                }else{
+
+                    $articlePublish =  DB::table("articles") ->select(array("articles.id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.created_at" , "categories.id" , "categories.categoryName as category"))
+                    ->where('articles.publish', '=', "NON PUBLIE")
+                    ->leftJoin("categories", "categories.id", "=", "articles.category_id")
+                    ->orderBy('articles.id', 'desc')
+                    ->paginate(10);
+
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount, 'infosArticles' => $articlePublish], 'Liste des articles publiés');
+                }
+            }
+        }
+    }
+
+    public function byCategory()
+    {
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse($categoryCount, 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $categories = DB::table("categories") ->select(array("categories.id", "categories.categoryName","categories.status", "categories.slug" , DB::raw('COUNT(articles.id) as countArticles')))
+            ->leftJoin("articles", "articles.category_id", "=", "categories.id")
+            ->groupBy("categories.id", "categories.categoryName","categories.status", "categories.slug")
+            ->orderBy('countArticles', 'desc')
+            ->paginate(10);
+
+            return $this->sendResponse(['categories'=>$categories, 'categoryCount'=>$categoryCount], 'Liste de toutes les categories.');
+        }
+    }
+
+    public function byAuthor()
+    {
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse(['categoryCount' => $categoryCount, 'infosArticlesCount' => 0], 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $articleCount = Article::count();
+
+            if ($articleCount == 0) {
+    
+                return $this->sendResponse(['articleCount' => $articleCount, 'infosArticlesCount' => 0], 'Aucun article n\'est enregistré.');
+    
+            }else{
+                $articlePublishCount = Article::where('publish', '=', "OUI PUBLIE")->count();
+
+                if ($articlePublishCount == 0) {
+        
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount], 'Aucun article publié n\'est enregistré.');
+        
+                }else{
+
+                    $articlePublishCount =  DB::table("articles") ->select(array("articles.author", DB::raw('COUNT(category.id) as categoryCount') ,DB::raw('COUNT(articles.id) as articlesCount')))
+                    ->where('articles.author', '!=', "NON")
+                    ->leftJoin("categories", "categories.id", "=", "articles.category_id")
+                    ->groupBy("articles.author")
+                    ->count();
+
+                    if ($articlePublishCount == 0) {
+                        return $this->sendResponse(['infosArticlesCount' => $articlePublishCount], 'Aucun article publié n\'est enregistré avec un auteur.');
+                    } else {
+                        $articlePublish =  DB::table("articles") ->select(array("articles.author", DB::raw('COUNT(categories.id) as categoryCount') ,DB::raw('COUNT(articles.id) as articlesCount')))
+                        ->where('articles.author', '!=', "NON")
+                        ->leftJoin("categories", "categories.id", "=", "articles.category_id")
+                        ->groupBy("articles.author")
+                        ->orderBy('articles.author', 'desc')
+                        ->paginate(10);
+                    
+
+                    return $this->sendResponse(['infosArticlesCount' => $articlePublishCount, 'infosArticles' => $articlePublish], 'Liste des articles publiés');
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    public function changeAlaUne($id)
+    {
+        $article = Article::findOrFail($id);
+
+        if ($article->aLaUne === "NON") {
+            $article->aLaUne = "OUI";
+            $article->update();
+           return $this->sendResponse($article, 'Cet article a bien été mis a la une.');
+        } else {
+            $article->aLaUne = "NON";
+            $article->update();
+            return $this->sendResponse($article, 'Cet article a bien été enlevé de à la une.');
+        }
+        
+    }
+
+    public function changePublish($id)
+    {
+        $article = Article::findOrFail($id);
+
+        if ($article->publish === "NON PUBLIE") {
+            $article->publish = "OUI PUBLIE";
+            $article->update();
+            return $this->sendResponse($article, 'Cet article a bien été publié.');
+        } else {
+            $article->publish = "NON PUBLIE";
+            $article->update();
+            return $this->sendResponse($article, 'La publication de cet article a été desactivé.');
+        }
     }
 
     /**
@@ -34,7 +222,6 @@ class ArticleController extends BaseController
 
             $validator = Validator::make($datas, [
                 'title' => ['required', 'string', 'unique:articles' ,'max:255'],
-                'subtitle' => ['string'],
                 'content' => ['required', 'string'],
                 'category_id' => ['required', 'integer'],
                 'aLaUne' => ['required', 'string'],
@@ -63,21 +250,51 @@ class ArticleController extends BaseController
 
             }
 
-            if (($datas['publish'] == "NON") && ($datas['aLaUne'] == "OUI")) {
+            if ($datas['author'] == null) {
+
+                $datas['author'] = "NON";
+
+            }
+
+            if ($datas['subtitle'] == null) {
+
+                $datas['subtitle'] = "NON";
+
+            }
+
+            if (($datas['publish'] == "NON PUBLIE") && ($datas['aLaUne'] == "OUI")) {
 
                 return $this->sendError('Ooops Desolé. Vous ne pouvez pas mettre un article à la Une sans le publier');
 
             }
 
-            $article = Article::create([
-                'title' => $datas['title'],
-                'slug' =>  $datas['slug'],
-                'subtitle' =>  $datas['subtitle'],
-                'content' =>  $datas['content'],
-                'category_id' =>  $datas['category_id'],
-                'aLaUne' =>  $datas['aLaUne'],
-                'publish' =>  $datas['publish'],
-            ]);
+            if ($datas['publish'] == "OUI PUBLIE") {
+
+                $article = Article::create([
+                    'title' => $datas['title'],
+                    'slug' =>  $datas['slug'],
+                    'subtitle' =>  $datas['subtitle'],
+                    'author' =>  $datas['author'],
+                    'content' =>  $datas['content'],
+                    'category_id' =>  $datas['category_id'],
+                    'aLaUne' =>  $datas['aLaUne'],
+                    'publish' =>  $datas['publish'],
+                    'date_publish' =>  now(),
+                ]);
+
+            }else{
+
+                $article = Article::create([
+                    'title' => $datas['title'],
+                    'slug' =>  $datas['slug'],
+                    'subtitle' =>  $datas['subtitle'],
+                    'author' =>  $datas['author'],
+                    'content' =>  $datas['content'],
+                    'category_id' =>  $datas['category_id'],
+                    'aLaUne' =>  $datas['aLaUne'],
+                    'publish' =>  $datas['publish'],
+                ]);
+            }
 
         $uploadFiles = $request->filesArticle;
 
@@ -147,8 +364,40 @@ class ArticleController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function destroyByAuthor($author)
+    {
+        $articles = Article::where('author', '=' ,$author);
+
+        $articlesSHH = Article::where('author', '=' ,$author)->get();
+
+        foreach ($articlesSHH as $article) {
+
+            $medias = Media::where('article_id', '=', $article->id);
+
+            $medias->delete();
+        }
+
+        $articles->delete();
+
+        return $this->sendResponse($articles, "Les articles de cet auteur et ses fichiers ont été supprimés avec succès.");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        $medias = Media::where('article_id', '=', $article->id);
+
+        $medias->delete();
+
+        $article->delete();
+
+        return $this->sendResponse($article, "L' article et ses fichiers ont été supprimés avec succès.");
     }
 }

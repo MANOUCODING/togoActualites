@@ -19,6 +19,12 @@ import VisitesComponent from '../components/admin/Visites/VisitesComponent.vue';
 
 import ArticlesPublishComponent from '../components/admin/Articles/ArticlesPublishComponent.vue';
 
+import ArticlesNotPublishComponent from '../components/admin/Articles/ArticlesNotPublishComponent.vue';
+
+import ArticlesByCategoryComponent from '../components/admin/Articles/ArticlesByCategoryComponent.vue';
+
+import ArticlesByAuthorComponent from '../components/admin/Articles/ArticlesByAuthorComponent.vue';
+
 import CreateArticlesComponent from '../components/admin/Articles/Actions/CreateArticlesComponent.vue';
 
 import LoginComponent from '../components/LoginComponent.vue';
@@ -84,9 +90,27 @@ const routes = [
   },
 
   {
-    path: '/admin/articles',
+    path: '/admin/articles/publish',
     component:  ArticlesPublishComponent,
-    name: 'articles.all'
+    name: 'articles.publish'
+  },
+
+  {
+    path: '/admin/articles/not/publish',
+    component:  ArticlesNotPublishComponent,
+    name: 'articles.not.publish'
+  },
+
+  {
+    path: '/admin/articles/by/category',
+    component:  ArticlesByCategoryComponent,
+    name: 'articles.by.category'
+  },
+
+  {
+    path: '/admin/articles/by/author',
+    component:  ArticlesByAuthorComponent,
+    name: 'articles.by.author'
   },
 
   {

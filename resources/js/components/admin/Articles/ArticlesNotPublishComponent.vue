@@ -8,14 +8,15 @@
 <!-- =======================
 Main contain START -->
 <section class="py-4">
-	<div class="container-fluid">
+	<div class="container">
      <div v-if="load" style="display: block; margin-left: auto; margin-right: auto; margin-top: 20%;" class="conteneur_general_load_10">
       <img src="/assets/images/LOGO PNG.png" style="width: 200px; height: 65px; text-align: center" alt=""> <br> <br>
       <div class="cle_bleu_load_10" style="margin-left: auto; margin-right: auto"></div>
      </div>
-		<div v-else class="row g-4">
+     <div  v-else >
+		<div class="row g-4">
             <!-- Counter item -->
-             <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3">
                 <router-link to="/admin/articles/plus/lus">
                     <div class="card card-body border p-3">
                         <div class="d-flex align-items-center">
@@ -102,8 +103,9 @@ Main contain START -->
 					<!-- Card header START -->
 					<div class="card-header bg-transparent border-bottom p-3">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h5 class="mb-2 mb-sm-0">Les articles non publies <span class="badge bg-primary bg-opacity-10 text-primary">105</span></h5>
-							<router-link to="/admin/articles/publiees"   class="btn btn-sm btn-primary mb-0">Les articles publiees</router-link>
+							<h5 class="mb-2 mb-sm-0">Les articles publiés <span class="badge bg-primary bg-opacity-10 text-primary">{{ infosArticlesCount }}</span></h5>
+							<router-link to="/admin/articles/publish"   class="btn btn-sm btn-primary mb-0"><i class="bi bi-eye"></i>
+              &nbsp;Voir Les articles publiés</router-link>
 						</div>
 					</div>
 					<!-- Card header END -->
@@ -129,31 +131,57 @@ Main contain START -->
 								<!-- Table head -->
 								<thead class="table-dark">
 									<tr>
-										<th scope="col" class="border-0 rounded-start">#</th>
 										<th scope="col" class="border-0">Titre</th>
-										<th scope="col" class="border-0">Fichiers</th>
-                                        <th scope="col" class="border-0">Categorie</th>
 										<th scope="col" class="border-0">Auteur</th>
-                                        <th scope="col" class="border-0">Status</th>
-                                        <th scope="col" class="border-0">A la Une</th>
-                                        <th scope="col" class="border-0">Ajouté le </th>
-										<th scope="col" class="border-0 rounded-end">Action</th>
+                    <th scope="col" class="border-0">Categorie</th>
+                    <th scope="col" class="border-0">Publié</th>
+                    <th scope="col" class="border-0">Ajouté le </th>
+										<th scope="col" class="border-0 rounded-end">Actions</th>
 									</tr>
 								</thead>
 
 								<!-- Table body START -->
-								<tbody class="border-top-0">
+								<tbody class="border-top-0" v-for="infosArticle in infosArticles.data" :key="infosArticle.id">
 									<!-- Table item -->
 
+                  <td>
+                    <h6 class="course-title mt-2 mt-md-0 mb-0" ><a href="#"> {{ infosArticle.title }} </a></h6>
+                  </td>
 
+                 <td>
+                   
+                    <a href="#" style="color: #fff" class="badge text-bg-danger mb-2" v-if="infosArticle.author === 'NON'">   Pas d'auteur</a>
+                    <a href="#" style="color: #fff" class="badge text-bg-primary mb-2" v-else> {{ infosArticle.author }}    </a>
+                   
+                  </td>
+
+                  <td>
+                    <a href="#" style="color: #fff" class="badge text-bg-info mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> {{ infosArticle.category }} </a>
+                  </td>
+
+                  <td>
+                    
+                    <a href="#" style="color: #fff" class="badge text-bg-warning mb-2" @click="changePublish(infosArticle.id)">  {{ infosArticle.publish }}</a>
+                    
+                  </td>
+                  <td>
+                    <a href="#" style="color: #fff" class="badge text-bg-warning mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>{{ moment(infosArticle.created_at).format(" MMM DD, YYYY") }}</a>
+                  </td>
+                  	<td>
+                      <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-danger btn-round mb-0" @click="deleteArticle(infosArticle.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimez cet article"><i class="bi bi-trash"></i></a>
+                        <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></a>
+                         <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></a>
+                      </div>
+										</td>
 								</tbody>
 								<!-- Table body END -->
 							</table>
 						</div>
 						<!-- Blog list table END -->
-
 						<!-- Pagination START -->
-                            <br>
+             <br>
+						<pagination style="float: right" :limit="4" :data="infosArticles" @pagination-change-page="getResults" />
 						<!-- Pagination END -->
 					</div>
           <div class="card-body" v-else-if="empty == 1">
@@ -172,6 +200,7 @@ Main contain START -->
 				<!-- Blog list table END -->
 			</div>
 		</div>
+  </div>
 
 </section>
 <!-- =======================
@@ -187,27 +216,19 @@ import moment from 'moment'
 export default {
   data() {
       return {
-        infos: {},
-        data: {
-          id: null,
-          categoryName: null,
-          sousCategoryBoolean: 0,
-        },
+        infosArticles: {},
+        infosArticlesCount: null,
+        
         empty : null,
         message: "",
-        addCategoryButton: false,
-        updateCategoryButton: false,
         loading: false,
-        errorType: false,
-        errorMessage : "",
-        errors: {},
         load: true,
       }
   },
   methods: {
     getResults(page = 1){
       axios
-        .get('/api/category?page=' + page)
+        .get('/api/articles/not/publish?page=' + page)
         .then(response => {
           this.load = false
           if(response.status == 200){
@@ -216,124 +237,68 @@ export default {
               if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
                 this.empty = 1
                 this.message = response.data.message
-              } else {
-                this.empty = 0
-                this.infos = response.data.data
-              }
-            }
-          }
-      });
-    },
-
-    saveCategory(){
-      this.loading = true
-      this.errors = {}
-      this.errorType = false
-      this.errorMessage  = ""
-      axios.post('/api/category/store',{
-        categoryName : this.data.categoryName,
-        sousCategoryBoolean: this.data.sousCategoryBoolean ? 1 : 0
-      })
-      .then(response =>{
-          if(response.status == 200){
-
-            if(response.data.success == false){
-              if (response.data.message == "Erreur de validation") {
-                this.loading = false
-                this.errors = response.data.errors
-              }
-            }else{
-              if (response.data.message == "Votre catégorie a ete créée avec succès.") {
-                this.loading = false
-                this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Votre catégorie a ete créée avec succès. </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
-                this.getResults();
-              }
-            }
-          }
-        }
-      ).catch(error =>{
-        console.dir(error)
-      })
-      this.data.categoryName = null
-      this.data.sousCategoryBoolean = 0
-    },
-
-    update(id){
-      this.loading = true
-      this.errors = {}
-      this.errorType = false
-      this.errorMessage  = ""
-      axios.put(`/api/category/${id}/update`,{
-        categoryName : this.data.categoryName,
-      })
-      .then(response =>{
-          if(response.status == 200){
-
-            if(response.data.success == false){
-              if (response.data.message == "Erreur de validation") {
-                this.loading = false
-                this.errors = response.data.errors
-              }
-            }else{
-              if (response.data.message == "Votre catégorie a été modifiée avec succès.") {
-                this.loading = false
-                this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Votre catégorie a été modifiée avec succès. </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
-                this.getResults();
-              }
-            }
-          }
-        }
-      ).catch(error =>{
-        console.dir(error)
-      })
-      this.data.categoryName = null
-      this.addCategoryButton = false
-    },
-
-    updateCategory(id){
-      this.updateCategoryButton = true;
-      this.addCategoryButton = false;
-      axios
-        .get(`/api/category/${id}`)
-        .then(response => {
-          if(response.status == 200){
-            if (response.data.success == false) {
-            }else{
-              if (response.data.message == 'Aucune catégrie trouvée.') {
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+              }else if(response.data.message == 'Aucun article n\'est enregistré.'){
                 this.empty = 1
                 this.message = response.data.message
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+              }else if(response.data.message == 'Aucun article publié n\'est enregistré.'){
+                this.empty = 1
+                this.message = response.data.message
+                this.infosArticlesCount= response.data.data.infosArticlesCount
               } else {
                 this.empty = 0
-                this.data = response.data.data
+                this.infosArticles= response.data.data.infosArticles
+                this.infosArticlesCount= response.data.data.infosArticlesCount
               }
             }
           }
       });
-
-
     },
 
-    closeUpdateCategory(){
-      this.updateCategoryButton = false;
-    },
 
-    addCategory(){
-      this.addCategoryButton = true;
-      this.updateCategoryButton = false;
-    },
-
-    closeAddCategory(){
-      this.addCategoryButton = false;
-    },
-
-    sousCategoryBooleanH(){
-       this.data.sousCategoryBoolean = 0
-    },
-
-    deleteCategory(id) {
+    changePublish(id) {
        this.$swal({
         title: "Etes-vous sûr?",
-        text: "Vous ne pourrez plus récupérer ces actualités!",
+        text: "voulez vous vraiment publier cet article!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, publier!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios.patch(`/api/article/${id}/publish`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == 'Cet article a bien été publié.') {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+
+    },
+
+    deleteArticle(id) {
+       this.$swal({
+        title: "Etes-vous sûr?",
+        text: "Vous ne pourrez plus récupérer ces articles!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "blue",
@@ -343,11 +308,10 @@ export default {
         closeOnCancel: true
       }).then((confirmed) => {
         if (confirmed.isConfirmed) {
-          axios
-          .delete(`/api/category/${id}`)
+          axios.delete(`/api/article/${id}/delete`)
           .then(response => {
               this.getResults();
-                if (response.data.message == 'La categorie a été supprimée avec succès.') {
+                if (response.data.message == 'L\' article et ses fichiers ont été supprimés avec succès.') {
                   this.$swal({
                       title: "Succès!",
                       text: response.data.message,

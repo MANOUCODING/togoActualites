@@ -52,6 +52,22 @@ Route::get('/articles/create', [ArticleController::class, 'create']);
 
 Route::post('/articles/store', [ArticleController::class, 'store']);
 
+Route::get('/articles/publish', [ArticleController::class, 'publish']);
+
+Route::get('/articles/not/publish', [ArticleController::class, 'notPublish']);
+
+Route::get('/articles/by/category', [ArticleController::class, 'byCategory']);
+
+Route::get('/articles/by/author', [ArticleController::class, 'byAuthor']);
+
+Route::delete('/article/{id}/delete', [ArticleController::class, 'destroy']);
+
+Route::delete('/article/{id}/delete/author', [ArticleController::class, 'destroyByAuthor']);
+
+Route::patch('/article/{id}/publish', [ArticleController::class, 'changePublish']);
+
+Route::patch('/article/{id}/alaune', [ArticleController::class, 'changeAlaUne']);
+
 //Gestion des visites
 
 Route::get('/visites', [VisiteController::class, 'index']);

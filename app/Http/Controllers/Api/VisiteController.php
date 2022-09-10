@@ -55,10 +55,11 @@ class VisiteController extends BaseController
 
                 if( $visite_dateM == date('m-y')){
 
-                    $countVisitesM++;
+                    if( $visite_dateW == date('d-m-Y')){
 
+                        $countVisitesJ++;
 
-                    //Nombre d'utlisateur depuis les 7 derniers Jours
+                    }
 
                     $year = substr(date('Y-m-d'), 0, -6);
                     $month = substr(date('Y-m-d'), -5, -3);
@@ -67,40 +68,87 @@ class VisiteController extends BaseController
                     // récupère la date du jour
                     $date_string = mktime(0,0,0,$month,$day,$year);
 
-                    // Supprime les jours
-                    $timestamp = $date_string - (7 * 86400);
+                    if ($day === 1) {
+                        // Supprime les jours
+                        $timestamp = $date_string - (1 * 86400);
 
-                    $nouvelle_date = date("d-m-Y", $timestamp);
+                        $nouvelle_date = date("d-m-Y", $timestamp);
 
-                    if ($nouvelle_date <=  $visite_dateW) {
+                        if ($nouvelle_date <=  $visite_dateW) {
 
-                        $countVisitesW++;
-
-                    }
-
-                    //Nombre d'utilisateur  depuis 24H
-                    if ($visite_dateW == date("d-m-Y")) {
-                        $h1 = 86400;
-                        $h2 = strtotime(date("H:i:s"));
-                        $Start = gmdate("H:i:s", $h2-$h1);
-                        if ($Start <=  $visite_dateJ) {
-
-                            $countVisitesJ++;
-
-                            $h1 = 3600;
-                            $h2 = strtotime(date("H:i:s"));
-                            $StartH = gmdate("H:i:s", $h2-$h1);
-
-                            if ($StartH <=  $visite_dateJ) {
-
-                                $countVisitesH++;
-
-
-                            }
+                            $countVisitesW++;
 
                         }
+                    }elseif ($day === 2) {
+                        // Supprime les jours
+                        $timestamp = $date_string - (2 * 86400);
 
+                        $nouvelle_date = date("d-m-Y", $timestamp);
+
+                        if ($nouvelle_date <=  $visite_dateW) {
+
+                            $countVisitesW++;
+
+                        }
+                    }elseif ($day === 3) {
+                       // Supprime les jours
+                       $timestamp = $date_string - (3 * 86400);
+
+                       $nouvelle_date = date("d-m-Y", $timestamp);
+
+                       if ($nouvelle_date <=  $visite_dateW) {
+
+                           $countVisitesW++;
+
+                       }
+                    }elseif ($day === 4) {
+                        // Supprime les jours
+                        $timestamp = $date_string - (4 * 86400);
+
+                        $nouvelle_date = date("d-m-Y", $timestamp);
+ 
+                        if ($nouvelle_date <=  $visite_dateW) {
+ 
+                            $countVisitesW++;
+ 
+                        }
+                    }elseif ($day === 5) {
+                        // Supprime les jours
+                        $timestamp = $date_string - (5 * 86400);
+
+                        $nouvelle_date = date("d-m-Y", $timestamp);
+
+                        if ($nouvelle_date <=  $visite_dateW) {
+
+                            $countVisitesW++;
+
+                        }
+                    }elseif ($day === 6) {
+                       // Supprime les jours
+                       $timestamp = $date_string - (6 * 86400);
+
+                       $nouvelle_date = date("d-m-Y", $timestamp);
+
+                       if ($nouvelle_date <=  $visite_dateW) {
+
+                           $countVisitesW++;
+
+                       }
+                    }elseif($day >= 7){
+                        // Supprime les jours
+                       $timestamp = $date_string - (7 * 86400);
+
+                       $nouvelle_date = date("d-m-Y", $timestamp);
+
+                       if ($nouvelle_date <=  $visite_dateW) {
+
+                           $countVisitesW++;
+
+                       }
                     }
+                   
+
+                    $countVisitesM++;
 
 
 
@@ -191,7 +239,6 @@ class VisiteController extends BaseController
                 'countArticlesJ' =>  $countArticlesJ,
                 'countArticlesW' =>  $countArticlesW,
                 'countArticlesM' =>  $countArticlesM,
-                'countVisitesH' =>  $countVisitesH,
                 'countVisitesJ' =>  $countVisitesJ,
                 'countVisitesW' =>  $countVisitesW,
                 'countVisitesM' =>  $countVisitesM,

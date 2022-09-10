@@ -53,55 +53,53 @@ Main contain START -->
 								<!-- Table body START -->
 								<tbody class="border-top-0">
 									<!-- Table item -->
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">Depuis 01 heure</th>
-                                        <th scope="col">{{ infos.countVisitesH  }} visites</th>
-                                        <th scope="col">{{ infos.countArticlesH  }} articles</th>
+                  <tr>
+                    <th scope="col">1</th>
+                    <th scope="col">Aujourd'hui</th>
+                    <th scope="col">{{ infos.countVisitesJ  }} visites</th>
+                    <th scope="col">{{ infos.countArticlesJ  }} articles</th>
 										<!-- Table data -->
 										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
-                                            </div>
+                      <div class="d-flex gap-2">
+                          <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
+                      </div>
 										</td>
 									</tr>
 
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">Depuis 24 heures</th>
-                                        <th scope="col">{{ infos.countVisitesJ  }} visites</th>
-                                        <th scope="col">{{ infos.countArticlesJ  }} articles</th>
+                  <tr>
+                      <th scope="col">2</th>
+                      <th scope="col">Cette semaine</th>
+                      <th scope="col">{{ infos.countVisitesW  }} visites</th>
+                      <th scope="col">{{ infos.countArticlesW  }} articles</th>
 										<!-- Table data -->
 										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
-                                            </div>
+                      <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
+                      </div>
 										</td>
 									</tr>
-
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">Depuis 07 jours</th>
-                                        <th scope="col">{{ infos.countVisitesW  }} visites</th>
-                                        <th scope="col">{{ infos.countArticlesW  }} articles</th>
+                  <tr>
+                    <th scope="col">3</th>
+                    <th scope="col">Dans ce mois</th>
+                    <th scope="col">{{ infos.countVisitesM  }} visites</th>
+                    <th scope="col">{{ infos.countArticlesM  }} articles</th>
 										<!-- Table data -->
 										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
-                                            </div>
+                      <div class="d-flex gap-2">
+                          <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
+                      </div>
 										</td>
 									</tr>
-
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">Depuis 01 mois</th>
-                                        <th scope="col">{{ infos.countVisitesM  }} visites</th>
-                                        <th scope="col">{{ infos.countArticlesM  }} articles</th>
+                  <tr>
+                    <th scope="col">4</th>
+                    <th scope="col">Totale des visites & articles</th>
+                    <th scope="col">{{ infos.visitesCount  }} visites</th>
+                    <th scope="col">{{ infos.countArticlesM  }} articles</th>
 										<!-- Table data -->
 										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
-                                            </div>
+                      <div class="d-flex gap-2">
+                          <a href="#" class="btn btn-primary btn-round mb-0" @click="showArticlesConsult(info.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les articles consultes"><i class="bi bi-eye"></i></a>
+                      </div>
 										</td>
 									</tr>
 								</tbody>
@@ -113,18 +111,18 @@ Main contain START -->
 						<!-- Pagination START -->
 						<!-- Pagination END -->
 					</div>
-                    <div class="card-body" v-else-if="empty == 1">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6">
-                                <div style="position: relative; height: 400px;">
-                                    <img src="/assets/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
-                                </div>
-                                <h6 style="text-align: center; margin-top: -50px"> {{ message  }} </h6>
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                    </div>
+          <div class="card-body" v-else-if="empty == 1">
+              <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                      <div style="position: relative; height: 400px;">
+                          <img src="/assets/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                      </div>
+                      <h6 style="text-align: center; margin-top: -50px"> {{ message  }} </h6>
+                  </div>
+                  <div class="col-md-3"></div>
+              </div>
+          </div>
 				</div>
 				<!-- Blog list table END -->
 			</div>

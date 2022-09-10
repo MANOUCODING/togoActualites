@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Article;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Category;
+use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,9 +29,13 @@ class CategoryController extends BaseController
 
         } else {
 
-            $categories = Category::paginate(10);
+            $categories = DB::table("categories") ->select(array("categories.id", "categories.categoryName","categories.status", "categories.slug" , DB::raw('COUNT(articles.id) as countArticles')))
+            ->leftJoin("articles", "articles.category_id", "=", "categories.id")
+            ->groupBy("categories.id", "categories.categoryName","categories.status", "categories.slug")
+            ->orderBy('countArticles', 'desc')
+            ->paginate(10);
 
-            return $this->sendResponse($categories, 'Liste de toutes les categories.');
+            return $this->sendResponse(['categories'=>$categories, 'categoryCount'=>$categoryCount], 'Liste de toutes les categories.');
         }
         
     }
@@ -141,6 +148,19 @@ class CategoryController extends BaseController
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+
+        $articlesHH = Article::where('category_id', '=', $category->id);
+        
+        $articles = Article::where('category_id', '=', $category->id)->get();
+
+        foreach ($articles as $article) {
+
+            $medias = Media::where('article_id', '=', $article->id);
+
+            $medias->delete();
+        }
+
+        $articlesHH->delete();
 
         $category->delete();
 

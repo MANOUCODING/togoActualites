@@ -30,9 +30,9 @@ Header START -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-pencil me-1"></i>Articles</a>
 						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-							<li> <router-link class="dropdown-item" to="/admin/articles">Tous les articles</router-link></li>
-							<li> <router-link class="dropdown-item" to="#">Articles par categories</router-link></li>
-							<li> <router-link class="dropdown-item" to="#">Articles par auteur</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/articles/publish">Articles publiés</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/articles/by/category">Articles par categories</router-link></li>
+							<li> <router-link class="dropdown-item" to="/admin/articles/by/author">Articles par auteur</router-link></li>
 							<li> <router-link class="dropdown-item" to="/admin/articles/create">Ajouter un article</router-link></li>
 						</ul>
 					</li>

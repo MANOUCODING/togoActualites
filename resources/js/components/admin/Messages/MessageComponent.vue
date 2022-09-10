@@ -72,12 +72,11 @@ Main contain START -->
 								<!-- Table head -->
 								<thead class="table-dark">
 									<tr>
-										<th scope="col" class="border-0 rounded-start">#</th>
 										<th scope="col" class="border-0">Nom complet</th>
 										<th scope="col" class="border-0">Telephone</th>
-                                        <th scope="col" class="border-0">Email</th>
-                                        <th scope="col" class="border-0">Sujet</th>
-                                        <th scope="col" class="border-0">Envoyé le</th>
+                    <th scope="col" class="border-0">Email</th>
+                    <th scope="col" class="border-0">Sujet</th>
+                    <th scope="col" class="border-0">Envoyé le</th>
 										<th scope="col" class="border-0 rounded-end">Actions</th>
 									</tr>
 								</thead>
@@ -86,10 +85,6 @@ Main contain START -->
 								<tbody class="border-top-0" v-for="info in infos.messages.data" :key="info.id" >
 									<!-- Table item -->
 									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#"> {{ info.id }}</a></h6>
-										</td>
 										<!-- Table data -->
 										<td>
 											<h6 class="mb-0"><a href="#">{{ info.nomComplet }}</a></h6>

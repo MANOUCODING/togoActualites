@@ -53,16 +53,31 @@ Main contain START -->
               <div class="col-12">
                  <div class="mb-3"  v-if="!errors.subtitle">
                     <label class="form-label">Sous-titre de l'article ou une petite description (Pas obligatoire)</label>
-                    <input class="form-control pe-5 bg-transparent" type="text" name="subtitle" v-model="data.subtitle" placeholder="Entrez le titre de l'article">
+                    <input class="form-control pe-5 bg-transparent" type="text" name="subtitle" v-model="data.subtitle" placeholder="Entrez un sous-titre de l'article ou une petite description">
                   </div>
                   <div class="mb-3"  v-else>
                      <label class="form-label">Sous-titre de l'article ou une petite description (Pas obligatoire)</label>
-                    <input class="form-control pe-5 bg-transparent is-invalid" name="subtitle" v-model="data.subtitle" type="text" placeholder="Entrez le titre de l'article">
+                    <input class="form-control pe-5 bg-transparent is-invalid" name="subtitle" v-model="data.subtitle" type="text" placeholder="Entrez un sous-titre de l'article ou une petite description">
                     <div  v-for="error_subtitle in errors.subtitle" :key="error_subtitle" class="invalid-feedback" style="color: red; font-size: 0.9em">
                         {{ error_subtitle }}
                     </div>
                   </div>
               </div>
+
+               <div class="col-12">
+                 <div class="mb-3"  v-if="!errors.author">
+                    <label class="form-label">Noms & Prénoms de l'Auteur (Pas obligatoire)</label>
+                    <input class="form-control pe-5 bg-transparent" type="text" name="author" v-model="data.author" placeholder="Entrez le noms et le prenoms de l'auteur">
+                  </div>
+                  <div class="mb-3"  v-else>
+                     <label class="form-label">Noms & Prénoms de l'Auteur (Pas obligatoire)</label>
+                    <input class="form-control pe-5 bg-transparent is-invalid" name="author" v-model="data.author" type="text" placeholder="Entrez le noms et le prenoms de l'auteur">
+                    <div  v-for="error_author in errors.author" :key="error_author" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                        {{ error_author }}
+                    </div>
+                  </div>
+              </div>
+
 
               <!-- Main toolbar -->
                 <div class="col-md-12">
@@ -95,18 +110,18 @@ Main contain START -->
                 <div class="col-lg-12">
                   <!-- Message -->
                   <div class="mb-3" v-if="!errors.category_id">
-                    <label class="form-label">Choisir une categorie</label>
+                    <label class="form-label">Choisir une catégorie</label>
                     <select class="form-select" aria-label="Default select example" v-model="data.category_id">
                       <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.categoryName }}</option>
                     </select>
                   </div>
                   <div class="mb-3" v-else>
-                    <label class="form-label">Choisir une categorie</label>
+                    <label class="form-label">Choisir une catégorie</label>
                     <select class="form-select" aria-label="Default select example" v-model="data.category_id">
                       <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.categoryName }}</option>
                     </select>
-                      <div  v-for="error_category_id in errors.category_id" :key="error_category_id" class="invalid-feedback" style="color: red; font-size: 0.9em">
-                        {{ error_category_id }}
+                      <div  v-for="error_category in errors.category_id" :key="error_category" class="invalid-feedback" style="color: red; font-size: 0.9em">
+                        {{ error_category }}
                     </div>
                   </div>
                 </div>  <br>
@@ -114,19 +129,19 @@ Main contain START -->
                   <div v-if="data.publishBoolean">
                     <h5>Voulez vous publier cet article ? </h5>
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean" checked="" class="custom-control-input"><span class="custom-control-label">OUI</span>
+                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean" checked="" class="custom-control-input"><span class="custom-control-label">&nbsp;OUI</span>
                     </label> &nbsp; &nbsp; &nbsp;
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean"   @click="publishH()" class="custom-control-input"><span class="custom-control-label">NON</span>
+                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean"   @click="publishH()" class="custom-control-input"><span class="custom-control-label">&nbsp;NON</span>
                     </label>
                   </div>
                   <div v-else>
                     <h5> Voulez vous publier cet article ? </h5>
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean" class="custom-control-input"><span class="custom-control-label">OUI</span>
+                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean" class="custom-control-input"><span class="custom-control-label">&nbsp;OUI</span>
                     </label> &nbsp; &nbsp; &nbsp;
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean"  checked="" class="custom-control-input"><span class="custom-control-label">NON</span>
+                        <input type="radio" name="publishBoolean" v-model="data.publishBoolean"  checked="" class="custom-control-input"><span class="custom-control-label">&nbsp;NON</span>
                     </label>
                   </div>
                 </div>
@@ -134,19 +149,19 @@ Main contain START -->
                   <div v-if="data.aLaUneBoolean">
                     <h5>Voulez vous mettre cet article à la Une ? </h5>
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean" checked="" class="custom-control-input"><span class="custom-control-label">OUI</span>
+                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean" checked="" class="custom-control-input"><span class="custom-control-label">&nbsp;OUI</span>
                     </label> &nbsp; &nbsp; &nbsp;
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean"   @click="aLaUneH()" class="custom-control-input"><span class="custom-control-label">NON</span>
+                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean"   @click="aLaUneH()" class="custom-control-input"><span class="custom-control-label">&nbsp;NON</span>
                     </label>
                   </div>
                   <div v-else>
                     <h5> Voulez vous mettre cet article à la Une ? </h5>
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean" class="custom-control-input"><span class="custom-control-label">OUI</span>
+                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean" class="custom-control-input"><span class="custom-control-label">&nbsp;OUI</span>
                     </label> &nbsp; &nbsp; &nbsp;
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean"  checked="" class="custom-control-input"><span class="custom-control-label">NON</span>
+                        <input type="radio" name="aLaUneBoolean" v-model="data.aLaUneBoolean"  checked="" class="custom-control-input"><span class="custom-control-label">&nbsp;NON</span>
                     </label>
                   </div>
                 </div>
@@ -194,10 +209,11 @@ export default{
       data: {
         title: null,
         subtitle: null,
+        author: null,
         content: null,
         category_id: null,
         aLaUne: "NON",
-        publish: "NON",
+        publish: "NON PUBLIE",
         publishBoolean: 0,
         aLaUneBoolean: 0,
       },
@@ -262,7 +278,11 @@ export default{
 
      create(){
 
-      this.data.publish = this.data.publishBoolean ? "OUI" : "NON"
+      if (this.data.author == null) {
+        this.data.author = "NON"
+      }
+
+      this.data.publish = this.data.publishBoolean ? "OUI PUBLIE" : "NON PUBLIE"
       this.data.aLaUne = this.data.aLaUneBoolean ? "OUI" : "NON"
       this.data.content = this.editorData
 
@@ -272,6 +292,7 @@ export default{
       this.form.append('category_id', this.data.category_id)
       this.form.append('publish', this.data.publish)
       this.form.append('aLaUne', this.data.aLaUne)
+      this.form.append('author', this.data.author)
 
       for(let i = 0; i< this.attachement.length; i++){
 
