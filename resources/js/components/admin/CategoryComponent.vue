@@ -117,7 +117,6 @@ Main contain START -->
 										
 										<th scope="col" class="border-0">Nom de la catégorie</th>
 										<th scope="col" class="border-0">Articles</th>
-										<th scope="col" class="border-0">Status</th>
                     <th scope="col" class="border-0">Ajouté le </th>
 										<th scope="col" class="border-0 rounded-end">Action</th>
 									</tr>
@@ -135,13 +134,6 @@ Main contain START -->
 										<td v-if="info.countArticles == 0"><a href="#" style="color: #fff" class="badge text-bg-danger mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> Pas d'articles </a></td>
                     <td v-else><a href="#" style="color: #fff" class="badge text-bg-primary mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> {{ info.countArticles }} article(s) </a></td>
 										<!-- Table data -->
-										<td v-if="info.status">
-											<a href="#" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Active</a>
-										</td>
-
-                    <td v-else>
-											<a href="#" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Inactive</a>
-										</td>
 										<!-- Table data -->
 										<td>
 											<span class="badge bg-success bg-opacity-10 text-info mb-2"> {{ moment(info.created_at).format(" MMM DD, YYYY") }}</span>

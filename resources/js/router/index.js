@@ -9,9 +9,16 @@ import ContactComponent from '../components/ContactComponent.vue';
 
 import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
+
+//Gestion des categories
+
 import CategoryComponent from '../components/admin/CategoryComponent.vue';
 
+//Gestion des messages
+
 import MessageComponent from '../components/admin/Messages/MessageComponent.vue';
+
+//Gestion des visites
 
 import VisitesComponent from '../components/admin/Visites/VisitesComponent.vue';
 
@@ -27,7 +34,26 @@ import ArticlesByAuthorComponent from '../components/admin/Articles/ArticlesByAu
 
 import CreateArticlesComponent from '../components/admin/Articles/Actions/CreateArticlesComponent.vue';
 
+
+//Gestion des utilisateurs
+
+import UsersExternesComponent from '../components/admin/Users/UsersExternesComponent.vue';
+
+import UsersInternesComponent from '../components/admin/Users/UsersInternesComponent.vue';
+
+import UsersSatistiquesComponent from '../components/admin/Users/UsersSatistiquesComponent.vue';
+
+//Gestion des newsLatters
+
+import NewsLattersComponent from '../components/admin/NewsLatters/NewsLattersComponent.vue';
+
+import StatistiquesNewsLatterComponent from '../components/admin/NewsLatters/StatistiquesNewsLatterComponent.vue';
+
+//Page de connexion
+
 import LoginComponent from '../components/LoginComponent.vue';
+
+//Page d'inscription
 
 import RegisterComponent from '../components/RegisterComponent.vue';
 
@@ -117,6 +143,36 @@ const routes = [
     path: '/admin/articles/create',
     component:  CreateArticlesComponent,
     name: 'articles.create'
+  },
+
+  {
+    path: '/admin/newslatters/statistiques',
+    component: StatistiquesNewsLatterComponent,
+    name: 'newslatters.statistiques'
+  },
+
+  {
+    path: '/admin/newslatters',
+    component:  NewsLattersComponent,
+    name: 'newslatters'
+  },
+
+  {
+    path: '/admin/users/statistiques',
+    component:  UsersSatistiquesComponent,
+    name: 'users.statistiques'
+  },
+
+  {
+    path: '/admin/users/externes',
+    component:  UsersExternesComponent,
+    name: 'users.externes'
+  },
+
+  {
+    path: '/admin/users/internes',
+    component: UsersInternesComponent,
+    name: 'users.internes'
   },
 
 

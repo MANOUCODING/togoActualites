@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\NewsLatterController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VisiteController;
 use App\Http\Controllers\AuthController;
+use App\Models\NewsLatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +36,9 @@ Route::group(['middleware' => 'api'], function($router) {
 
 //Espace Super Administrateur
 
+//Tableau de Bord
+
+Route::get('/articles/publish/dashboard', [DashboardController::class, 'index']);
 
 //Gestion des categories
 
@@ -78,7 +85,42 @@ Route::post('/visites/create', [VisiteController::class, 'store']);
 //Gestion Message
 
 Route::post('/message/store', [MessageController::class, 'store']);
+
 Route::get('/messages', [MessageController::class, 'index']);
+
 Route::get('/messages/{id}', [MessageController::class, 'show']);
+
 Route::delete('/message/{id}', [MessageController::class, 'destroy']);
+
+//NewsLatters
+
+Route::get('/newslatters/statistiques', [NewsLatterController::class, 'statisques']);
+
+Route::get('/newslatters', [NewsLatterController::class, 'index']);
+
+Route::get('/newslatters/{id}', [NewsLatterController::class, 'show']);
+
+Route::put('/newslatters/{id}/update', [NewsLatterController::class, 'update']);
+
+Route::delete('/newslatters/{id}', [NewsLatterController::class, 'destroy']);
+
+Route::post('/newslatters/store', [NewsLatterController::class, 'store']);
+
+Route::patch('/newslatters/{id}/status', [NewsLatterController::class, 'changeStatus']);
+
+
+//NewsLatters
+
+Route::get('/users/statistiques', [UserController::class, 'statisques']);
+
+Route::get('/users/externes', [UserController::class, 'index']);
+
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+Route::delete('/users/{id}/HH', [UserController::class, 'destroyHH']);
+
+Route::patch('/users/{id}/status', [UserController::class, 'changeStatus']);
+
+Route::patch('/users/{id}/status/HH', [UserController::class, 'changeStatusHH']);
+
 

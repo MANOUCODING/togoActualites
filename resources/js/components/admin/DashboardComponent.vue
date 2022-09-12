@@ -9,6 +9,11 @@
 Main contain START -->
 <section class="py-4">
 	<div class="container">
+		<div v-if="load" style="display: block; margin-left: auto; margin-right: auto; margin-top: 20%;" class="conteneur_general_load_10">
+      <img src="/assets/images/LOGO PNG.png" style="width: 200px; height: 65px; text-align: center" alt=""> <br> <br>
+      <div class="cle_bleu_load_10" style="margin-left: auto; margin-right: auto"></div>
+     </div>
+     <div  v-else >
 		<div class="row g-4">
 
 			<div class="col-12">
@@ -25,7 +30,7 @@ Main contain START -->
 								</div>
 								<!-- Content -->
 								<div class="ms-3">
-									<h3>1340</h3>
+									<h3>{{ infos.usersCountHH }}</h3>
 									<h6 class="mb-0">Utilisateurs</h6>
 								</div>
 							</div>
@@ -42,8 +47,8 @@ Main contain START -->
 								</div>
 								<!-- Content -->
 								<div class="ms-3">
-									<h3>180</h3>
-									<h6 class="mb-0">Actualités</h6>
+									<h3>{{ infos.articleCountHH }}</h3>
+									<h6 class="mb-0">Articles</h6>
 								</div>
 							</div>
 						</div>
@@ -76,8 +81,84 @@ Main contain START -->
 								</div>
 								<!-- Content -->
 								<div class="ms-3">
-									<h3>84000</h3>
+									<h3>{{ infos.visitesCountHH }}</h3>
 									<h6 class="mb-0">Visiteurs</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Counter END -->
+			</div>
+
+			<div class="col-12">
+				<!-- Counter START -->
+				<div class="row g-4">
+
+					<!-- Counter item -->
+					<div class="col-sm-6 col-lg-3">
+						<div class="card card-body border p-3">
+							<div class="d-flex align-items-center">
+								<!-- Icon -->
+								<div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">
+									<i class="bi bi-file-earmark-text-fill"></i>
+								</div>
+								<!-- Content -->
+								<div class="ms-3">
+									<h3>{{ infos.categoryCountHH }}</h3>
+									<h6 class="mb-0">Categories</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Counter item -->
+					<div class="col-sm-6 col-lg-3">
+						<div class="card card-body border p-3">
+							<div class="d-flex align-items-center">
+								<!-- Icon -->
+								<div class="icon-xl fs-1 bg-primary bg-opacity-10 rounded-3 text-primary">
+									<i class="bi bi-file-earmark-text-fill"></i>
+								</div>
+								<!-- Content -->
+								<div class="ms-3">
+									<h3>{{ infos.articleNotPublishCount }}</h3>
+									<h6 class="mb-0">Articles non publiés</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Counter item -->
+					<div class="col-sm-6 col-lg-3">
+						<div class="card card-body border p-3">
+							<div class="d-flex align-items-center">
+								<!-- Icon -->
+								<div class="icon-xl fs-1 bg-info bg-opacity-10 rounded-3 text-info">
+									<i class="bi bi-bar-chart-line-fill"></i>
+								</div>
+								<!-- Content -->
+								<div class="ms-3">
+									<h3>{{ infos.newsLatterCount }}</h3>
+									<h6 class="mb-0">Abonnés newslatters</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Counter item -->
+					<div class="col-sm-6 col-lg-3">
+						<div class="card card-body border p-3">
+							<div class="d-flex align-items-center">
+								<!-- Icon -->
+								<div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">
+									<i class="bi bi-people-fill"></i>
+								</div>
+								<!-- Content -->
+								<div class="ms-3">
+									<h3>{{ infos.articleAuthor }}</h3>
+									<h6 class="mb-0">Auteurs</h6>
 								</div>
 							</div>
 						</div>
@@ -93,35 +174,23 @@ Main contain START -->
 					<!-- Card header START -->
 					<div class="card-header bg-transparent border-bottom p-3">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h5 class="mb-2 mb-sm-0">Les actualités en ligne <span class="badge bg-primary bg-opacity-10 text-primary">105</span></h5>
-							<a href="#" class="btn btn-sm btn-primary mb-0">Ajouter une actualité</a>
+							<h5 class="mb-2 mb-sm-0">Les 20 dernières articles publiés <span class="badge bg-primary bg-opacity-10 text-primary">{{ infosArticlesCount }}</span></h5>
+							<router-link to="/admin/articles/not/publish"   class="btn btn-sm btn-primary mb-0"><i class="bi bi-eye"></i>
+              &nbsp;Voir Les articles non publiés</router-link>
 						</div>
 					</div>
 					<!-- Card header END -->
 
 					<!-- Card body START -->
-					<div class="card-body">
+					<div class="card-body" v-if="empty == 0">
 
 						<!-- Search and select START -->
 						<div class="row g-3 align-items-center justify-content-between mb-3">
 							<!-- Search -->
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<form class="rounded position-relative">
 									<input class="form-control pe-5 bg-transparent" type="search" placeholder="Effectuez une recherche ..." aria-label="Search">
 									<button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
-								</form>
-							</div>
-
-							<!-- Select option -->
-							<div class="col-md-3">
-								<!-- Short by filter -->
-								<form>
-									<select class="form-select z-index-9 bg-transparent" aria-label=".form-select-sm">
-										<option value="">Triez par</option>
-										<option>Free</option>
-										<option>Newest</option>
-										<option>Oldest</option>
-									</select>
 								</form>
 							</div>
 						</div>
@@ -133,223 +202,82 @@ Main contain START -->
 								<!-- Table head -->
 								<thead class="table-dark">
 									<tr>
-										<th scope="col" class="border-0 rounded-start">Blog Name</th>
-										<th scope="col" class="border-0">Author Name</th>
-										<th scope="col" class="border-0">Published Date</th>
-										<th scope="col" class="border-0">Categories</th>
-										<th scope="col" class="border-0">Status</th>
-										<th scope="col" class="border-0 rounded-end">Action</th>
+										<th scope="col" class="border-0">Titre</th>
+										<th scope="col" class="border-0">Auteur</th>
+                    <th scope="col" class="border-0">Categorie</th>
+                    <th scope="col" class="border-0">Status</th>
+                    <th scope="col" class="border-0">A la Une</th>
+                    <th scope="col" class="border-0">Publié le </th>
+										<th scope="col" class="border-0 rounded-end">Actions</th>
 									</tr>
 								</thead>
 
 								<!-- Table body START -->
-								<tbody class="border-top-0">
+								<tbody class="border-top-0" v-for="infosArticle in infosArticles.data" :key="infosArticle.id">
 									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">12 worst types of business accounts you follow on Twitter</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Lori Stevens</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Jan 22, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-warning mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Technology</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-success bg-opacity-10 text-success mb-2">Live</span>
-										</td>
-										<!-- Table data -->
-										<td>
+                  <td>
+                    <h6 class="course-title mt-2 mt-md-0 mb-0" ><a href="#"> {{ infosArticle.title }} </a></h6>
+                  </td>
+
+                  <td>
+                   
+                    <a href="#" style="color: #fff" class="badge text-bg-danger mb-2" v-if="infosArticle.author === 'NON'">   Pas d'auteur</a>
+                    <a href="#" style="color: #fff" class="badge text-bg-primary mb-2" v-else> {{ infosArticle.author }}    </a>
+                   
+                  </td>
+
+                  <td>
+                    <a href="#" style="color: #fff" class="badge text-bg-info mb-2"> <i class="fas fa-circle me-2 small fw-bold"></i> {{ infosArticle.category }} </a>
+                  </td>
+
+                  <td>
+                    
+                    <a href="#" style="color: #fff" class="badge text-bg-warning mb-2" @click="changePublish(infosArticle.id)">  {{ infosArticle.publish }}</a>
+                    
+                  </td>
+                  <td>
+                   
+                    <a href="#" style="color: #fff" @click="changeAlaUneYES(infosArticle.id)" class="badge text-bg-danger mb-2" v-if="infosArticle.aLaUne  == 'NON'">  {{ infosArticle.aLaUne }} </a>
+                    <a href="#" @click="changeAlaUneNO(infosArticle.id)" style="color: #fff" class="badge text-bg-info mb-2" v-else>  {{ infosArticle.aLaUne }} </a>
+                    
+                  </td>
+                  <td>
+                    <a href="#" style="color: #fff" class="badge text-bg-warning mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>{{ moment(infosArticle.date_publish).format(" MMM DD, YYYY") }}</a>
+                  </td>
+                  	<td>
                       <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                        <a href="#" class="btn btn-danger btn-round mb-0" @click="deleteArticle(infosArticle.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimez cet article"><i class="bi bi-trash"></i></a>
+                        <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></a>
+                         <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></a>
                       </div>
 										</td>
-									</tr>
-
-									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">Dirty little secrets about the business industry</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Dennis Barrett</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Jan 19, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-info mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Marketing</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-warning bg-opacity-15 text-warning mb-2">Draft</span>
-										</td>
-										<!-- Table data -->
-										<td>
-                      <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      </div>
-										</td>
-									</tr>
-
-									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">7 common mistakes everyone makes while traveling</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Billy Vasquez</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Nov 11, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Photography</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-success bg-opacity-10 text-success mb-2">Live</span>
-										</td>
-										<!-- Table data -->
-										<td>
-                      <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      </div>
-										</td>
-									</tr>
-
-									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">5 investment doubts you should clarify</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Lori Stevens</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Jan 22, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-success mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Gadgets</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-success bg-opacity-10 text-success mb-2">Live</span>
-										</td>
-										<!-- Table data -->
-										<td>
-                      <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                        <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      </div>
-										</td>
-									</tr>
-
-									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">Bad habits that people in the industry need to quit</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Larry Lawson</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Dec 06, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Sports</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-danger bg-opacity-10 text-danger mb-2">Removed</span>
-										</td>
-										<!-- Table data -->
-										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                                                <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                            </div>
-										</td>
-									</tr>
-
-									<!-- Table item -->
-									<tr>
-										<!-- Table data -->
-										<td>
-											<h6 class="course-title mt-2 mt-md-0 mb-0"><a href="#">Around the web: 20 fabulous infographics about business</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>
-											<h6 class="mb-0"><a href="#">Bryan Knight</a></h6>
-										</td>
-										<!-- Table data -->
-										<td>Feb 14, 2022</td>
-										<!-- Table data -->
-										<td>
-											<a href="#" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Travel</a>
-										</td>
-										<!-- Table data -->
-										<td>
-											<span class="badge bg-success bg-opacity-10 text-success mb-2">Live</span>
-										</td>
-										<!-- Table data -->
-										<td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash"></i></a>
-                                                <a href="dashboard-post-edit.html" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                            </div>
-										</td>
-									</tr>
-
 								</tbody>
 								<!-- Table body END -->
 							</table>
 						</div>
 						<!-- Blog list table END -->
-
 						<!-- Pagination START -->
-						<div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
-							<!-- Content -->
-							<p class="mb-sm-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-							<!-- Pagination -->
-							<nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
-								<ul class="pagination pagination-sm pagination-bordered mb-0">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-									<li class="page-item"><a class="page-link" href="#">15</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
+             <br>
+						<pagination style="float: right" :limit="4" :data="infosArticles" @pagination-change-page="getResults" />
 						<!-- Pagination END -->
 					</div>
+          <div class="card-body" v-else-if="empty == 1">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div style="position: relative; height: 400px;">
+                        <img src="/assets/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                    </div>
+                    <h6 style="text-align: center; margin-top: -50px"> {{ message  }} </h6>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+          </div>
 				</div>
 				<!-- Blog list table END -->
 			</div>
 		</div>
+		 </div>
 	</div>
 </section>
 <!-- =======================
@@ -361,7 +289,212 @@ Main contain END -->
 
 </template>
 <script>
+import moment from 'moment'
 export default {
+  data() {
+      return {
+        infosArticles: {},
+        infosArticlesCount: null,
+        infos: {},
+        empty : null,
+        message: "",
+        loading: false,
+        load: true,
+      }
+  },
+  methods: {
+    getResults(page = 1){
+      axios
+        .get('/api/articles/publish/dashboard?page=' + page)
+        .then(response => {
+          this.load = false
+          if(response.status == 200){
+            if (response.data.success == false) {
+            }else{
+              if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
+                this.empty = 1
+                this.message = response.data.message
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+								this.infos= response.data.data
+              }else if(response.data.message == 'Aucun article n\'est enregistré.'){
+                this.empty = 1
+                this.message = response.data.message
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+								this.infos= response.data.data
+              }else if(response.data.message == 'Aucun article publié n\'est enregistré.'){
+                this.empty = 1
+                this.message = response.data.message
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+								this.infos= response.data.data
+              } else {
+                this.empty = 0
+                this.infosArticles= response.data.data.infosArticles
+								this.infos= response.data.data
+                this.infosArticlesCount= response.data.data.infosArticlesCount
+              }
+            }
+          }
+      });
+    },
 
+
+    changePublish(id) {
+       this.$swal({
+        title: "Etes-vous sûr?",
+        text: "voulez vous vraiment desactiver cette publication!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, desactiver!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios.patch(`/api/article/${id}/publish`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == 'La publication de cet article a été desactivé.') {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+
+    },
+
+    changeAlaUneNO(id) {
+       this.$swal({
+        title: "Etes-vous sûr?",
+        text: "voulez vous vraiment enlevez cet article de la une!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, enlevez!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios.patch(`/api/article/${id}/alaune`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == 'Cet article a bien été enlevé de à la une.') {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+
+    },
+
+    changeAlaUneYES(id) {
+       this.$swal({
+        title: "Etes-vous sûr?",
+        text: "voulez vous vraiment mettre cet article à la une!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, Mettre!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios.patch(`/api/article/${id}/alaune`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == "Cet article a bien été mis a la une.") {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+
+    },
+
+
+    deleteArticle(id) {
+       this.$swal({
+        title: "Etes-vous sûr?",
+        text: "Vous ne pourrez plus récupérer ces articles!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, supprimez!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios.delete(`/api/article/${id}/delete`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == 'L\' article et ses fichiers ont été supprimés avec succès.') {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+
+    },
+  },
+
+  mounted(){
+    this.moment = moment;
+    this.getResults();
+  }
 }
 </script>
