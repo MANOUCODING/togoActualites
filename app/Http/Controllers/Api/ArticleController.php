@@ -62,7 +62,7 @@ class ArticleController extends BaseController
         
                 }else{
 
-                    $articlePublish = DB::table("articles") ->select(array("articles.id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.date_publish" , "categories.id" , "categories.categoryName as category"))
+                    $articlePublish = DB::table("articles") ->select(array("articles.id as id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.date_publish" , "categories.id as id_category" , "categories.categoryName as category"))
                     ->where('articles.publish', '=', "OUI PUBLIE")
                     ->leftJoin("categories", "categories.id", "=", "articles.category_id")
                     ->orderBy('articles.id', 'desc')
@@ -99,7 +99,7 @@ class ArticleController extends BaseController
         
                 }else{
 
-                    $articlePublish =  DB::table("articles") ->select(array("articles.id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.created_at" , "categories.id" , "categories.categoryName as category"))
+                    $articlePublish =  DB::table("articles") ->select(array("articles.id as id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish" , "articles.created_at" , "categories.id as id_category" , "categories.categoryName as category"))
                     ->where('articles.publish', '=', "NON PUBLIE")
                     ->leftJoin("categories", "categories.id", "=", "articles.category_id")
                     ->orderBy('articles.id', 'desc')
