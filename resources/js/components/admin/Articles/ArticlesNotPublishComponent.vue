@@ -170,8 +170,8 @@ Main contain START -->
                   	<td>
                       <div class="d-flex gap-2">
                         <a href="#" class="btn btn-danger btn-round mb-0" @click="deleteArticle(infosArticle.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimez cet article"><i class="bi bi-trash"></i></a>
-                        <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></a>
-                         <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></a>
+                        <router-link :to="{ name:'article.update.slug', params: { slug: infosArticle.title }}" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></router-link>
+                         <router-link :to="{ name:'article.show.slug', params: { slug: infosArticle.title }}" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></router-link>
                       </div>
 										</td>
 								</tbody>

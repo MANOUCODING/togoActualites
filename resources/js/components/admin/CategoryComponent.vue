@@ -155,7 +155,7 @@ Main contain START -->
 
 						<!-- Pagination START -->
             <br>
-						<pagination style="float: right" :limit="4" :data="infos" @pagination-change-page="getResults" />
+						<pagination style="float: right" :limit="4" :data="infos.categories" @pagination-change-page="getResults" />
 						<!-- Pagination END -->
 					</div>
           <div class="card-body" v-else-if="empty == 1">

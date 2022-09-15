@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('subtitle')->default("NON");
+            $table->text('subtitle')->default("NON");
             $table->string('author')->default("NON");
             $table->text('content');
             $table->string('slug');

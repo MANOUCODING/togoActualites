@@ -9,6 +9,21 @@ import ContactComponent from '../components/ContactComponent.vue';
 
 import DashboardComponent from '../components/admin/DashboardComponent.vue';
 
+//Partie Publicateur d'article
+
+import PublicateurDashboardComponent from '../components/publicateur/DashboardComponent.vue';
+
+import PublicateurArticlesNotPublishComponent from '../components/publicateur/ArticlesNotPublishComponent.vue';
+
+import PublicateurArticlesByCategoryComponent from '../components/publicateur/ArticlesByCategoryComponent.vue';
+
+import PublicateurArticlesByAuthorComponent from '../components/publicateur/ArticlesByAuthorComponent.vue';
+
+import PublicateurCreateArticlesComponent from '../components/publicateur/Actions/CreateArticlesComponent.vue';
+
+import PublicateurShowArticlesComponent from '../components/publicateur/Actions/ShowArticlesComponent.vue';
+
+import PublicateurUpdateArticleComponent from '../components/publicateur/Actions/UpdateArticleComponent.vue';
 
 //Gestion des categories
 
@@ -33,6 +48,10 @@ import ArticlesByCategoryComponent from '../components/admin/Articles/ArticlesBy
 import ArticlesByAuthorComponent from '../components/admin/Articles/ArticlesByAuthorComponent.vue';
 
 import CreateArticlesComponent from '../components/admin/Articles/Actions/CreateArticlesComponent.vue';
+
+import ShowArticlesComponent from '../components/admin/Articles/Actions/ShowArticlesComponent.vue';
+
+import UpdateArticleComponent from '../components/admin/Articles/Actions/UpdateArticleComponent.vue';
 
 
 //Gestion des utilisateurs
@@ -90,11 +109,53 @@ const routes = [
     name: 'register'
   },
 
-
   {
     path: '/admin/dashboard',
     component:  DashboardComponent,
-    name: 'dashboard'
+    name: 'superadmin.dashboard'
+  },
+
+  {
+    path: '/publicateur/home',
+    component:  PublicateurDashboardComponent,
+    name: 'publicateur.dashboard'
+  },
+ 
+
+  {
+    path: '/publicateur/articles/not/publish',
+    component:  PublicateurArticlesNotPublishComponent,
+    name: 'PublicateurArticlesNotPublishComponent'
+  },
+
+  {
+    path: '/publicateur/articles/by/category',
+    component:  PublicateurArticlesByCategoryComponent,
+    name: 'PublicateurArticlesByCategoryComponent'
+  },
+
+  {
+    path: '/publicateur/articles/by/author',
+    component:  PublicateurArticlesByAuthorComponent,
+    name: 'PublicateurArticlesByAuthorComponent'
+  },
+
+  {
+    path: '/publicateur/articles/create',
+    component:  PublicateurCreateArticlesComponent,
+    name: 'PublicateurCreateArticlesComponent'
+  },
+
+  {
+    path: '/publicateur/articles/:slug/show',
+    component:  PublicateurShowArticlesComponent,
+    name: 'article.show.slug.publicateur'
+  },
+
+  {
+    path: '/publicateur/articles/:slug/update',
+    component:  PublicateurUpdateArticleComponent,
+    name: 'article.update.slug.publicateur'
   },
 
   {
@@ -143,6 +204,18 @@ const routes = [
     path: '/admin/articles/create',
     component:  CreateArticlesComponent,
     name: 'articles.create'
+  },
+
+  {
+    path: '/admin/articles/:slug/show',
+    component:  ShowArticlesComponent,
+    name: 'article.show.slug'
+  },
+
+  {
+    path: '/admin/articles/:slug/update',
+    component:  UpdateArticleComponent,
+    name: 'article.update.slug'
   },
 
   {

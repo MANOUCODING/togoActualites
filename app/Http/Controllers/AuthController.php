@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrateur;
+use App\Models\NewsLatter;
 use App\Models\Role;
 use App\Models\Utilisateur;
 use App\Models\User;
@@ -20,7 +21,7 @@ class AuthController extends BaseController
      */
     public function __construct() {
 
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
         
     }
     /**
@@ -181,6 +182,11 @@ class AuthController extends BaseController
             'nomComplet' => $datas['nomComplet'],
             'role_id' => $role->id,
             'user_id' => $user->id,
+        ]);
+
+        $newsLatter = NewsLatter::create([
+            'email' => $datas['email'],
+            'status' =>  1,
         ]);
 
         return $this->sendResponse($utlisateur, 'Votre Compte a ete cree avec succes.');

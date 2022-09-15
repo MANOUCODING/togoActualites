@@ -5,6 +5,8 @@
     <!-- =======================Trending END -->
     <main >
 
+
+
 <!-- =======================
 Main hero START -->
 <section class="pt-4 pb-0 card-grid">
@@ -806,7 +808,7 @@ Main content START -->
 				</div>
                 <div class="border-bottom border-primary border-2 opacity-1 my-4"></div>
                 <div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-12">
 						<!-- Card item START -->
 						<div class="card mb-3">
 							<div class="row g-3">
@@ -3483,8 +3485,6 @@ Section END -->
 	</div>
 </section>
 
-
-
     </main>
        <!--==================== MAIN ====================-->
     <footerbar> </footerbar>
@@ -3497,14 +3497,19 @@ export default {
 		return {
             infos: {},
             load: true,
+						empty: null,
+						aLaUne: {},
+						message: null,
+						emptyAlaUne: null,
+						messageAlaUne: null,
+						
         }
 	},
     methods: {
          getResults(){
             axios.post('/api/visites/create' )
                 .then(response => {
-                    console.log(response.data)
-                this.load = false
+                
                 if(response.status == 200){
                     if (response.data.success == false) {
                     }else{
@@ -3513,12 +3518,81 @@ export default {
                         this.message = response.data.message
                     } else {
                         this.empty = 0
-                        this.infos = response.data.data
+                        this.ArticleCategorieResults()
+												this.load = false
                     }
                     }
                 }
             });
         },
+
+				ArticleCategorieResults(){
+
+					 axios.post('/api/home')
+							.then(response => {
+                
+                if(response.status == 200){
+                    if (response.data.success == false) {
+
+                    }else{
+
+                    if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
+
+											this.empty = 1
+											this.message = response.data.message
+
+                    } else if(response.data.message == 'Aucun article n\'est enregistré.'){
+
+											this.empty = 1
+											this.message = response.data.message
+
+										} else if(response.data.message == 'Liste de toutes les categories et articles.'){
+
+												this.empty = 0
+												this.ArticleALaUneResults();
+
+										} 
+								}
+							}
+            });
+				},
+
+				ArticleALaUneResults(){
+
+					 axios.post('/api/alaUne')
+							.then(response => {
+                
+                if(response.status == 200){
+                    if (response.data.success == false) {
+
+                    }else{
+
+                    if (response.data.message == 'Aucune categorie n\'est enregistrée.') {
+
+                        this.empty = 1
+                        this.message = response.data.message
+
+                    } else if(response.data.message == 'Aucun article n\'est enregistré.'){
+
+												this.empty = 1
+                        this.message = response.data.message
+
+										} else if(response.data.message == 'Aucun article à la une  n\'est enregistré.'){
+
+											this.emptyAlaUne = 1
+											this.messageAlaUne = response.data.message
+
+										}else if(response.data.message == 'liste des articles a la une'){
+
+											this.emptyAlaUne = 0
+											this.aLaUne = response.data.data
+
+										}
+
+								}
+							}
+            });
+				}
     },
     mounted() {
         this.getResults();

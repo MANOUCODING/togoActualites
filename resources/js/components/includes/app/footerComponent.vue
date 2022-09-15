@@ -16,12 +16,13 @@ Footer START -->
 			<div class="col-md-6">
 				<!-- Form -->
 				<form class="row row-cols-lg-auto g-2  justify-content-end">
-                    <h6 style="color: #fff">Abonnez vous pour etre informé de nos prochains articles</h6>
+					<h6 style="color: #fff">Abonnez vous pour etre informé de nos prochains articles</h6>
 					<div class="col-12">
-						<input type="email" class="form-control" placeholder="Entrez votre email ">
+						<input type="email" name="email" class="form-control" v-model="data.email" placeholder="Entrez votre email ">
 					</div>
 					<div class="col-12">
-						<button type="submit" class="btn btn-danger m-0">S' abonner</button>
+						<button type="submit" v-if="loading" class="btn btn-danger m-0">Abonnement en cours ...</button>
+						<button type="submit" v-else @click.prevent="saveNewsLetter" class="btn btn-danger m-0">S' abonner</button>
 					</div>
 				</form>
 			</div>
@@ -67,7 +68,7 @@ Footer START -->
 					<div class="col-4" >
 						<ul class="nav flex-column ">
 							<li class="nav-item "><a class="nav-link pt-0 text-white" href="#">A Ne Pas Rater Togo</a></li>
-							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">	Actualités</a></li>
+							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">Actualités</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">AFRIQUE</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">CAN</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">CHRONIQUES</a></li>
@@ -83,8 +84,7 @@ Footer START -->
  					<div class="col-4">
 						<ul class="nav flex-column ">
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">EDUCATION</a></li>
-							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">	FAITS DIVERS</a></li>
-							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">Fenêtre Sur L'Afrique</a></li>
+							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">FAITS DIVERS</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">FENETRE SUR L'AFRIQUE</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">HIGH TECH</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">IMPORTANT</a></li>
@@ -104,7 +104,6 @@ Footer START -->
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">SANTE</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">SOCIÉTÉ</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">SPORT</a></li>
-							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">Sports</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">TOGO</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">TOGO ACTUALITÉ</a></li>
 							<li class="nav-item"><a class="nav-link pt-0 text-white" href="#">Vidéos</a></li>
@@ -123,7 +122,7 @@ Footer START -->
         <hr style="border: 1px solid #fff">
 
         <div class="row">
-			<div class="col-md-12 col-lg-12 mb-4">
+			<div class="col-md-12 col-lg-12 col-sm-6  mb-4">
 				<div class="row ">
 
 					<div class="col-2" >
@@ -157,7 +156,7 @@ Footer START -->
         <!-- Divider -->
         <hr style="border: 1px solid #fff">
         <div class="row">
-			<div class="col-md-12 col-lg-12 mb-4">
+			<div class="col-md-12 col-lg-12 col-sm-6  mb-4">
 				<div class="row ">
 
 					<div class="col-2" >
@@ -241,11 +240,44 @@ Footer END -->
 export default {
   data(){
 		return {
-            infos: {},
-            load: false,
-        }
+			infos: {},
+			loading: false,
+			data: {
+				id: null,
+				email: null,
+				status: 1,
+			},
+		}
 	},
     methods: {
+			saveNewsLetter(){
+				this.loading = true
+				axios.post('/api/newslatters/store',{
+					email : this.data.email,
+					status: this.data.status ? 1 : 0
+				})
+				.then(response =>{
+						if(response.status == 200){
+						
+							if(response.data.success == false){
+								if (response.data.message == "Erreur de validation") {
+									this.loading = false
+									this.$toast.error("<h6 style=\"color: #fff \"><i class=\"fa fa-times-circle me-2\"></i>Veuillez bien verifier votre email</h6>",{position:"top-right",duration:5527,queue:true,max: 3});
+								}
+							}else{
+								if (response.data.message == "Votre email a bien été enregistré.Vous serez tenus informés de nos prochains articles") {
+									this.loading = false
+									this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i>Votre email a bien été enregistré.</br>Vous serez tenus informés de nos prochains articles.</h6>",{position:"top-right",duration:3527,queue:true,max: 3});
+								}
+								this.data.email = null
+								this.data.status = 1
+							}
+						}
+					}
+				).catch(error =>{
+					console.dir(error)
+				})
+    	},
     },
     mounted() {
         // this.getResults();

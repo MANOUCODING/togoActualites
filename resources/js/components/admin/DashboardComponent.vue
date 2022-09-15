@@ -82,7 +82,7 @@ Main contain START -->
 								<!-- Content -->
 								<div class="ms-3">
 									<h3>{{ infos.visitesCountHH }}</h3>
-									<h6 class="mb-0">Visiteurs</h6>
+									<h6 class="mb-0">Visites</h6>
 								</div>
 							</div>
 						</div>
@@ -245,10 +245,10 @@ Main contain START -->
                     <a href="#" style="color: #fff" class="badge text-bg-warning mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>{{ moment(infosArticle.date_publish).format(" MMM DD, YYYY") }}</a>
                   </td>
                   	<td>
-                      <div class="d-flex gap-2">
+                       <div class="d-flex gap-2">
                         <a href="#" class="btn btn-danger btn-round mb-0" @click="deleteArticle(infosArticle.id)"  data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimez cet article"><i class="bi bi-trash"></i></a>
-                        <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></a>
-                         <a href="#" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></a>
+                        <router-link :to="{ name:'article.update.slug', params: { slug: infosArticle.title }}" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifiez cet article"><i class="bi bi-pencil-square"></i></router-link>
+                         <router-link :to="{ name:'article.show.slug', params: { slug: infosArticle.title }}" class="btn btn-primary btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir cet article"><i class="bi bi-eye"></i></router-link>
                       </div>
 										</td>
 								</tbody>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Media;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -300,7 +301,7 @@ class ArticleController extends BaseController
 
         if (!empty($uploadFiles)) {
             foreach ($uploadFiles as $image) {
-                $imageName =   $image->store('articles');
+                $imageName =   $image->store('articles', 'public');
                $medias =  Media::create([
                     'picture_name' => $imageName,
                     'article_id' => $article->id
@@ -341,9 +342,53 @@ class ArticleController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse($categoryCount, 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $categories = Category::get();
+
+            $articleShow = Article::where('title', '=', $slug)->get();
+
+            return $this->sendResponse(['categories' => $categories, 'articleShow' => $articleShow[0]], 'Liste de toutes les categories.');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showHH($slug)
+    {
+
+        $categoryCount = Category::count();
+
+        if ($categoryCount == 0) {
+
+            return $this->sendResponse($categoryCount, 'Aucune categorie n\'est enregistrée.');
+
+        } else {
+
+            $categories = Category::get();
+
+            $articleShow =  DB::table("articles") ->select(array("articles.id as id", "articles.title","articles.author", "articles.slug" , "articles.aLaUne" , "articles.publish", "articles.subtitle", "articles.content" , "articles.created_at" , "categories.id as category_id" , "categories.categoryName as category"))
+            ->where('articles.title', '=', $slug)
+            ->leftJoin("categories", "categories.id", "=", "articles.category_id")
+            ->first();
+
+            $medias = Media::where('article_id', '=', $articleShow->id )->get();
+            
+            return $this->sendResponse(['categories' => $categories, 'articleShow' => $articleShow, 'medias' => $medias], 'Liste de toutes les categories.');
+        }
     }
 
     /**
@@ -353,9 +398,108 @@ class ArticleController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $datas = $request->all();
+
+        $validator = Validator::make($datas, [
+            'title' => ['required', 'string' ,'max:255'],
+            'content' => ['required', 'string'],
+            'category_id' => ['required', 'integer'],
+            'aLaUne' => ['required', 'string'],
+            'publish' => ['required', 'string'],
+        ],[
+            'required'=> 'Votre :attribute est obligatoire.',
+            'required.integer'=> 'Votre :attribute doit etre selecttonnée.',
+            'required.string'=> 'Votre :attribute doit etre une chaine de caractère.',
+            'title.required' => 'Le :attribute est obligatoire.'
+        ], [
+            'title' => 'titre',
+            'category_id' => 'catégorie',
+            'subtitle' => 'Sous Titre',
+            'content' => 'contenu'
+        ]);
+
+        if ($validator->fails()) {
+
+            return $this->sendError('Erreur de validation', $validator->errors());
+
+        }
+
+        if (isset($datas['title']) && !empty($datas['title'])) {
+
+            $datas['slug'] = Hash::make($datas['title']);
+
+        }
+
+        if ($datas['author'] == null) {
+
+            $datas['author'] = "NON";
+
+        }
+
+        if ($datas['subtitle'] == null) {
+
+            $datas['subtitle'] = "NON";
+
+        }
+
+        if (($datas['publish'] == "NON PUBLIE") && ($datas['aLaUne'] == "OUI")) {
+
+            return $this->sendError('Ooops Desolé. Vous ne pouvez pas mettre un article à la Une sans le publier');
+
+        }
+
+        if ($datas['publish'] == "OUI PUBLIE") {
+
+            $article =Article::where('title', '=', $slug)->first();
+
+            $article->update([
+                'title' => $datas['title'],
+                'slug' =>  $datas['slug'],
+                'subtitle' =>  $datas['subtitle'],
+                'author' =>  $datas['author'],
+                'content' =>  $datas['content'],
+                'category_id' =>  $datas['category_id'],
+                'aLaUne' =>  $datas['aLaUne'],
+                'publish' =>  $datas['publish'],
+                'date_publish' =>  now(),
+            ]);
+
+        
+
+        }else{
+
+            $article =Article::where('title', '=', $slug)->first();
+
+            $article->update([
+                'title' => $datas['title'],
+                'slug' =>  $datas['slug'],
+                'subtitle' =>  $datas['subtitle'],
+                'author' =>  $datas['author'],
+                'content' =>  $datas['content'],
+                'category_id' =>  $datas['category_id'],
+                'aLaUne' =>  $datas['aLaUne'],
+                'publish' =>  $datas['publish'],
+            ]);
+        }
+
+    $uploadFiles = $request->filesArticle;
+
+
+    if (!empty($uploadFiles)) {
+        foreach ($uploadFiles as $image) {
+            $imageName =    $image->store('articles');
+           $medias =  Media::create([
+                'picture_name' => $imageName,
+                'article_id' => $article->id
+            ]);
+        }
+    }
+
+
+
+    return $this->sendResponse($uploadFiles, 'L\'article a été modifié avec succès.');
     }
 
     /**

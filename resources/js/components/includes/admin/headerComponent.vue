@@ -144,7 +144,7 @@ export default {
 							}else{
 								this.loading = false
 								this.$toast.success("<h6 style=\"color: #fff \"><i class=\"fa fa-check-circle me-2\"></i> Déconnexion réussie </h6>",{position:"top-right",duration:3527,queue:true,max: 3});
-								this.$router.push({name:"home"})
+								window.location = '/'
 							}
 						}
 					}

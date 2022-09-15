@@ -14,11 +14,11 @@ Footer START -->
         <div class="col-lg-6 d-sm-flex align-items-center justify-content-center justify-content-lg-end">
           <!-- Language switcher -->
           <div class="dropup me-0 me-sm-3 mt-3 mt-md-0 text-center text-sm-end">
-            <a class="dropdown-toggle text-body" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class=" text-body" href="#" >
                 Téléphone: +33 06 14 30 57 86, +228 99 56 57 88
             </a>
 
-             <a class="dropdown-toggle text-body" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+             <a class="text-body" href="#">
                Email: contact@togoactualite.com
             </a>
 

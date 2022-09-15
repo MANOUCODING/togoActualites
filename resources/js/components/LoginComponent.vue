@@ -107,6 +107,7 @@ export default {
 				this.loading = true
 				axios.post('/api/login', this.data)
 				.then(response =>{
+					console.log(response.data)
 						if(response.status == 200){
 							this.errors = {}
 							this.loading = false
@@ -141,24 +142,23 @@ export default {
 								if (response.data.message == "ESPACE SUPER ADMINISTRATION") {
 									this.loading = false
 									this.$swal({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'Vous êtes maintenant connectés',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
+											position: 'top-end',
+											icon: 'success',
+											title: 'Vous êtes maintenant connectés',
+											showConfirmButton: false,
+											timer: 1500
+									});
 
-									this.$router.push({name:"dashboard"})
+									this.$router.push({name:"superadmin.dashboard"})
 								} else if(response.data.message == "ESPACE PUBLICATEUR ARTICLE") {
 									this.loading = false
 									this.$toast.success("<p><i class=\"fa fa-check-circle me-2\"></i> Vous êtes maintenant connectés</p>",{position:"top-right",duration:3527,queue:true,max: 3});
 
-									this.$router.push({name:"dashboard"})
+									this.$router.push({name:"publicateur.dashboard"})
 								}else if(response.data.message == "ESPACE UTILISATEUR") {
 									this.loading = false
 									this.$toast.success("<p><i class=\"fab fa-check-circle me-2\"></i> Vous êtes maintenant connectés</p>",{position:"top-right",duration:3527,queue:true,max: 3});
-
-									this.$router.push({name:"dashboard"})
+									window.location = "/home"
 								}
 							}
 						}
